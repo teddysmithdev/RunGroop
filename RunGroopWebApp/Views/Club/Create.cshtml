@@ -1,12 +1,13 @@
 ﻿@using RunGroopWebApp.Data.Enum
-@model Club
+@using RunGroopWebApp.ViewModels
+@model CreateClubViewModel
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
 
-<form method="post" asp-action="Create">
+<form method="post" asp-action="Create" enctype="multipart/form-data">
   <div class="form-group">
     <label asp-for="Title">Title</label>
     <input asp-for="Title" class="form-control" placeholder="Title">
@@ -16,11 +17,6 @@
     <label asp-for="Description">Description</label>
     <input asp-for="Description" class="form-control" placeholder="Description">
     <span asp-validation-for="Description" class="text-danger"></span>
-  </div>
-  <div class="form-group">
-    <label asp-for="Image">Image</label>
-    <input asp-for="Image" class="form-control" placeholder="Image">
-    <span asp-validation-for="Image" class="text-danger"></span>
   </div>
   <div class="form-group">
     <label asp-for="ClubCategory">ClubCategory</label>
@@ -43,6 +39,11 @@
     <label asp-for="Address.State">State</label>
     <input asp-for="Address.State" class="form-control" placeholder="Street">
     <span asp-validation-for="Address.State" class="text-danger"></span>
+  </div>
+    <div class="form-group">
+    <label asp-for="Image">Image</label>
+    <input asp-for="Image" type="file" class="form-control" placeholder="Image">
+    <span asp-validation-for="Image" class="text-danger"></span>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
