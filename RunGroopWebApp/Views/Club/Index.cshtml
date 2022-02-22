@@ -22,6 +22,7 @@
                       <a type="btn btn-success" asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id"
                                     class="btn btn-sm btn-outline-secondary">View</a>
                       <a asp-controller="Club" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                      <a asp-controller="Club" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
                     </div>
                     <small class="text-muted">@item.ClubCategory</small>
                   </div>
