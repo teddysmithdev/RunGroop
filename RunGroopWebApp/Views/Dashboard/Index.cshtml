@@ -10,31 +10,56 @@
 
             @foreach (var item in Model.Races)
             {
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                            dy=".3em">Thumbnail</text>
-                        </svg>
-
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
+                 <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="@item.Image" width="100%" height="225" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">@item.Title</p>
+                   <p class="card-text">@item.Description</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a type="btn btn-success" asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id"
+                                    class="btn btn-sm btn-outline-secondary">View</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-controller="Race" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a asp-controller="Race" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
+                        }
                     </div>
+                    <small class="text-muted">@item.RaceCategory</small>
+                  </div>
                 </div>
+              </div>
+            </div>
             }
-
-        </div>
+            </div>
+        <h2 class="display-4 fw-normal">Your Clubs</h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @foreach (var item in Model.Clubs)
+            {
+                <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="@item.Image" width="100%" height="225" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">@item.Title</p>
+                   <p class="card-text">@item.Description</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a type="btn btn-success" asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id"
+                                    class="btn btn-sm btn-outline-secondary">View</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-controller="Club" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a asp-controller="Club" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
+                        }
+                    </div>
+                    <small class="text-muted">@item.ClubCategory</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            }
+            </div>
+        
     </div>
 </div>
