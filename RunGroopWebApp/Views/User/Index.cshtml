@@ -1,0 +1,35 @@
+﻿@using RunGroopWebApp.ViewModels
+@model List<UserViewModel>
+
+
+   <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row">
+            @foreach(var item in Model)
+            {
+             <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                @*<img class="card-img-top" src="@item.Image" width="100%" height="225" alt="Card image cap">*@
+                <div class="card-body">
+                  <p class="card-text">@item.UserName</p>
+                   <p class="card-text">@item.Mileage</p>
+                   <p class="card-text">@item.Pace</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a type="btn btn-success" asp-controller="User" asp-action="Detail" asp-route-id="@item.Id"
+                                    class="btn btn-sm btn-outline-secondary">View</a>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                        {
+                            <a asp-controller="Club" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a asp-controller="Club" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
+                        }
+                    </div>
+                    @*<small class="text-muted">@item.ClubCategory</small>*@
+                  </div>
+                </div>
+              </div>
+            </div>
+            }
+          </div>
+        </div>
+      </div>
