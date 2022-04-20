@@ -1,38 +1,42 @@
-﻿@model IEnumerable<Club>
+@model IEnumerable<Club>
 
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
 @{
+    bool isAuthenticated = User.Identity?.IsAuthenticated == true;
 }
 
-   <div class="album py-5 bg-light">
-        <div class="container">
-          <div class="row">
-              @foreach(var item in Model)
+<section class="space-sm flush-with-above">
+    <div class="container">
+        <ul class="row feature-list feature-list-sm">
+            @foreach (var club in Model)
             {
-             <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="@item.Image" width="100%" height="225" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-text">@item.Title</p>
-                   <p class="card-text">@item.Description</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a type="btn btn-success" asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id"
-                                    class="btn btn-sm btn-outline-secondary">View</a>
-                        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
-                        {
-                            <a asp-controller="Club" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
-                            <a asp-controller="Club" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
-                        }
+                <li class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <a type="button" asp-controller="Club" asp-action="Detail" asp-route-id="@club.Id">
+                            <img class="card-img-top" src="@club.Image" alt="Card image cap">
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title">@club.Title</h4>
+                            <p class="card-text">@club.Description</p>
+                        </div>
+                        <div class="card-footer card-footer-borderless d-flex justify-content-between">
+                            @if (isAuthenticated && User.IsInRole("admin"))
+                            {
+                                <div>
+                                    <a type="button" class="btn btn-sm btn-outline-info" asp-controller="Club" asp-action="Edit" asp-route-id="@club.Id">
+                                        Edit
+                                    </a>
+                                    <a type="button" class="btn btn-sm btn-outline-danger" asp-controller="Club" asp-action="Delete" asp-route-id="@club.Id">
+                                        Delete
+                                    </a>
+                                </div>
+                            }
+                            <div>
+                                <small>@club.ClubCategory</small>
+                            </div>
+                        </div>
                     </div>
-                    <small class="text-muted">@item.ClubCategory</small>
-                  </div>
-                </div>
-              </div>
-            </div>
+                </li>
             }
-          </div>
-        </div>
-      </div>
+        </ul>
+    </div>
+</section>
