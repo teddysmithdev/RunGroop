@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="207px" height="147px" viewBox="0 0 207 147" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48 (47235) - http://www.bohemiancoding.com/sketch -->
+    <title>Illustration</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-594.000000, -293.000000)">
+        <g id="Works-Everywhere" transform="translate(548.000000, 181.000000)">
+            <g id="Illustration" transform="translate(48.000000, 113.000000)">
+                <g id="computer">
+                    <polygon id="Fill-1" fill="#F6F6F6" points="160 100.999 0 100.999 0 0.999 160 0.999"></polygon>
+                    <polygon id="Stroke-2" stroke="#545E65" stroke-width="4" points="160 100.999 0 100.999 0 0.999 160 0.999"></polygon>
+                    <path d="M81.5,92.4986 L78.5,95.4986" id="Stroke-4" stroke="#545E65" stroke-linejoin="bevel"></path>
+                    <path d="M65,117.9977 L65,104.9997" id="Stroke-5" stroke="#545E65" stroke-width="2"></path>
+                    <path d="M95,104.9994 L95,117.9974" id="Stroke-6" stroke="#545E65" stroke-width="2"></path>
+                    <path d="M101.0012,119.998 L59.0002,119.998" id="Stroke-7" stroke="#545E65" stroke-width="2"></path>
+                    <polygon id="Fill-8" fill="#C2E9F9" points="157.999 6 5 6 5 88.998 157.999 88.998"></polygon>
+                    <path d="M158,88.499 L5,88.499" id="Stroke-9" stroke="#545E65" stroke-linejoin="bevel"></path>
+                </g>
+                <g id="phone-&amp;-tablet" transform="translate(60.000000, 26.000000)">
+                    <path d="M40,20.998 C40,32.044 31.046,40.998 20,40.998 C8.954,40.998 0,32.044 0,20.998 C0,9.952 8.954,0.998 20,0.998 C31.046,0.998 40,9.952 40,20.998" id="Fill-10" fill="#F6F6F6"></path>
+                    <g id="Group-14" transform="translate(75.000000, 9.000000)" fill="#F6F6F6">
+                        <path d="M9.0025,90.998 C4.0395,90.998 0.0025,86.96 0.0025,81.998 L0.0025,9.998 C0.0025,5.036 4.0395,0.998 9.0025,0.998 L61.0025,0.998 C65.9655,0.998 70.0025,5.036 70.0025,9.998 L70.0025,81.998 C70.0025,86.96 65.9655,90.998 61.0025,90.998 L9.0025,90.998 Z" id="Fill-12"></path>
+                    </g>
+                    <path d="M59,120 C54.037,120 50,115.962 50,111 L50,63.002 C50,58.04 54.037,54.002 59,54.002 L80.997,54.002 C85.96,54.002 89.997,58.04 89.997,63.002 L89.997,111 C89.997,115.962 85.96,120 80.997,120 L59,120 Z" id="Fill-15" fill="#F6F6F6"></path>
+                    <path d="M136.0028,94.9979 L84.0028,94.9979 C81.7938,94.9979 80.0028,93.2069 80.0028,90.9979 L80.0028,18.9979 C80.0028,16.7889 81.7938,14.9979 84.0028,14.9979 L136.0028,14.9979 C138.2118,14.9979 140.0028,16.7889 140.0028,18.9979 L140.0028,90.9979 C140.0028,93.2069 138.2118,94.9979 136.0028,94.9979 L136.0028,94.9979 Z" id="Stroke-17" stroke="#545E65" stroke-width="2"></path>
+                    <polygon id="Fill-19" fill="#DDE0E2" points="83 24.998 139 24.998 139 84.996 83 84.996"></polygon>
+                    <path d="M139.0027,85.496 L83.0027,85.496" id="Stroke-21" stroke="#545E65" stroke-linejoin="bevel"></path>
+                    <path d="M139.0027,24.496 L83.0027,24.496" id="Stroke-22" stroke="#545E65" stroke-linejoin="bevel"></path>
+                    <path d="M108.5028,91.5016 L111.5028,88.5016" id="Stroke-23" stroke="#545E65" stroke-linejoin="bevel"></path>
+                    <polygon id="Fill-24" fill="#F6F6F6" points="100.0025 62.998 110.0025 45.998 120.0025 62.998"></polygon>
+                    <path d="M81,114.9956 L59.003,114.9956 C56.794,114.9956 55.003,113.2046 55.003,110.9956 L55.003,62.9976 C55.003,60.7886 56.794,58.9976 59.003,58.9976 L81,58.9976 C83.209,58.9976 85,60.7886 85,62.9976 L85,110.9956 C85,113.2046 83.209,114.9956 81,114.9956" id="Fill-25" fill="#F6F6F6"></path>
+                    <path d="M81,114.9956 L59.003,114.9956 C56.794,114.9956 55.003,113.2046 55.003,110.9956 L55.003,62.9976 C55.003,60.7886 56.794,58.9976 59.003,58.9976 L81,58.9976 C83.209,58.9976 85,60.7886 85,62.9976 L85,110.9956 C85,113.2046 83.209,114.9956 81,114.9956 L81,114.9956 Z" id="Stroke-26" stroke="#545E65" stroke-width="2"></path>
+                    <polygon id="Fill-27" fill="#D8F0C8" points="58.003 68.999 84 68.999 84 104.995 58.003 104.995"></polygon>
+                    <path d="M83.9999,105.4937 L58.0029,105.4937" id="Stroke-28" stroke="#545E65" stroke-linejoin="bevel"></path>
+                    <path d="M83.9999,68.4961 L58.0029,68.4961" id="Stroke-29" stroke="#545E65" stroke-linejoin="bevel"></path>
+                    <path d="M68.5015,111.4993 L71.5015,108.4993" id="Stroke-30" stroke="#545E65" stroke-linejoin="bevel"></path>
+                    <polygon id="Fill-31" fill="#F6F6F6" points="75.001 91.997 65.001 91.997 65.001 81.997 75.001 81.997"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
