@@ -6,73 +6,160 @@
     <title>@ViewData["Title"] - RunGroopWebApp</title>
     <link rel="stylesheet" href="~/css/theme.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/entypo.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/socicon.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/RunGroopWebApp.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RunGroopWebApp</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+     <div class="navbar-container">
+      <div class="bg-light navbar-light" data-sticky="top">
+        <div class="container">
+          <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" id="logo-text">RunGroops</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="icon-menu h4"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="user" asp-action="Index">Runners</a>
+                                <a class="nav-link" asp-area="" asp-controller="user" asp-action="Index">Runners</a>
                             </li>
                         }
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Club" asp-action="Index">Club</a>
+                            <a class="nav-link" asp-area="" asp-controller="Club" asp-action="Index">Club</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Race" asp-action="Index">Races</a>
+                            <a class="nav-link" asp-area="" asp-controller="Race" asp-action="Index">Races</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard"
-                                asp-action="Index">Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <form asp-area="" asp-controller="Account" asp-action="Logout">
-                                    <button class="btn btn-outline-danger">Logout</button>
-                                </form>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account"
-                                asp-action="Login">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account"
-                                asp-action="Register">Register</a>
-                            </li>
-                        }
-                    </ul>
-                </div>
+                
+              </ul>
+
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a asp-area="" asp-controller="Account"
+                                asp-action="Register">Sign up</a>
+                  <span>&nbsp;or&nbsp;</span><a asp-area="" asp-controller="Account"
+                                asp-action="Login">Sign in</a>
+                </li>
+              </ul>
+
             </div>
-        </nav>
-    </header>
-    <div class="container">
+            <!--end nav collapse-->
+          </nav>
+        </div>
+        <!--end of container-->
+      </div>
+    </div>
+    <div class="main-container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="bg-gray text-light footer-long">
         <div class="container">
-            &copy; 2022 - RunGroopWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+          <div class="row">
+            <div class="col-12 col-md-3">
+              <img alt="Image" src="assets/img/logo-white.svg" class="mb-4" />
+              <p class="text-muted">
+                &copy; 2019 Medium Rare
+                <br />Template available exclusively
+                <br />at Bootstrap Themes
+              </p>
+            </div>
+            <!--end of col-->
+            <div class="col-12 col-md-9">
+              <span class="h5">A robust suite of styled components for Bootstrap 4</span>
+              <div class="row no-gutters">
+                <div class="col-6 col-lg-3">
+                  <h6>Navigate</h6>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="index.html">Overview</a>
+                    </li>
+                    <li>
+                      <a href="pages-landing.html">Landing Pages</a>
+                    </li>
+                    <li>
+                      <a href="pages-app.html">App Pages</a>
+                    </li>
+                    <li>
+                      <a href="pages-inner.html">Inner Pages</a>
+                    </li>
+                  </ul>
+                </div>
+                <!--end of col-->
+                <div class="col-6 col-lg-3">
+                  <h6>Platform</h6>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="#">Mac OS &amp; iOS</a>
+                    </li>
+                    <li>
+                      <a href="#">Android &amp; Chrome OS</a>
+                    </li>
+                    <li>
+                      <a href="#">Windows</a>
+                    </li>
+                    <li>
+                      <a href="#">Linux</a>
+                    </li>
+                  </ul>
+                </div>
+                <!--end of col-->
+                <div class="col-6 col-lg-3">
+                  <h6>Community</h6>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="#">Forum</a>
+                    </li>
+                    <li>
+                      <a href="#">Knowledgebase</a>
+                    </li>
+                    <li>
+                      <a href="#">Hire an expert</a>
+                    </li>
+                    <li>
+                      <a href="#">FAQ</a>
+                    </li>
+                    <li>
+                      <a href="#">Contact</a>
+                    </li>
+                  </ul>
+                </div>
+                <!--end of col-->
+                <div class="col-6 col-lg-3">
+                  <h6>Company</h6>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="#">About company</a>
+                    </li>
+                    <li>
+                      <a href="#">History</a>
+                    </li>
+                    <li>
+                      <a href="#">Team</a>
+                    </li>
+                    <li>
+                      <a href="#">Investment</a>
+                    </li>
+                  </ul>
+                </div>
+                <!--end of col-->
+              </div>
+              <!--end of row-->
+            </div>
+            <!--end of col-->
+          </div>
+          <!--end of row-->
         </div>
-    </footer>
+        <!--end of container-->
+      </footer>
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/bootstrap.js"></script>
     <script src="~/js/theme.js"></script>
