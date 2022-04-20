@@ -1,6 +1,7 @@
 # RunGroops
 Rungroops is an online platform for runners. Find clubs, schedule events, and meet other runners in your area.
 
+[Link](https://rungroops.azurewebsites.net/)
 
 ## Get project working
 [Youtube video on how to get database setup](https://www.youtube.com/watch?v=af_tK9LUiX0)
