@@ -1,8 +1,13 @@
-/* 
-/* 
-/*  custom.css
-/*
-/*  If not using Gulp and Sass, add your custom CSS below then include it
-/*  in your page by adding a reference to assets/css/custom.css in the head of each page.
-/*
-*/
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+#logo-text {
+    font-family: "Jua", sans-serif;
+    font-size: 2rem;
+    color: #02B875;
+}
+
+#logo-green {
+    
+    font-family: "Jua", sans-serif;
+    font-size: 2rem;
+}
