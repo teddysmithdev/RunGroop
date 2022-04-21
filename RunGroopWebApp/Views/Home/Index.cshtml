@@ -52,7 +52,14 @@
       <!--end of section-->
       <section>
         <div class="container">
-          <div class="row justify-content-between mb-5">
+            @if (Model.Clubs == null)
+            {
+                <h1 class="fw-light">There are no running clubs in your area! <a asp-area="" asp-controller="Account"
+                    asp-action="Login">Login</a> and create one!</h1>
+            }
+            else
+            {
+               <div class="row justify-content-between mb-5">
             <div class="col-auto">
               <h3>Running clubs near @Model.City, @Model.State</h3>
             </div>
@@ -62,14 +69,6 @@
             </div>
             <!--end of col-->
           </div>
-          <!--end of row-->
-            @if (Model.Clubs == null)
-            {
-                <h1 class="fw-light">There are no running clubs in your area! <a asp-area="" asp-controller="Account"
-                    asp-action="Login">Login</a> and create one!</h1>
-            }
-            else
-            {
               <ul class="row feature-list feature-list-sm">
                 @foreach (var item in Model.Clubs)
                 {
@@ -92,9 +91,8 @@
                         </ul>
                       </div>
                       <div class="dropup">
-                        <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="SidekickButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id">Detail</i>
-                        </button>
+                        <a type="btn btn-success" asp-controller="Race" asp-action="Detail" asp-route-id="@item.Id"
+                                    class="btn btn-sm btn-outline-secondary">View</a>
                         <div class="dropdown-menu dropdown-menu-sm" aria-labelledby="SidekickButton">
                           <a class="dropdown-item" href="#">Save</a>
                           <a class="dropdown-item" href="#">Share</a>
@@ -113,49 +111,3 @@
         </div>
         <!--end of container-->
       </section>
-
-@*<section class="jumbotron text-center">
-    <div class="container">
-        <h1 class="jumbotron-heading">RunGroops</h1>
-        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator,
-            etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
-        <p>
-            <a href="#" class="btn btn-primary my-2">Main call to action</a>
-            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p>
-    </div>
-</section>
-<div class="album py-5 bg-light">
-    <div class="container">
-        <div class="row">
-            <h1 class="fw-light">Running clubs near @Model.City, @Model.State</h1>
-            @if (Model.Clubs == null)
-            {
-                <h1 class="fw-light">There are no running clubs in your area! <a asp-area="" asp-controller="Account"
-                    asp-action="Login">Login</a> and create one!</h1>
-            }
-            else
-            {
-                @foreach (var item in Model.Clubs)
-                {
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img src="@item.Image" class="bd-placeholder-img card-img-top" width="100%" height="225"></img>
-                            <div class="card-body">
-                                <p class="card-text">@item.Title</p>
-                                <p class="card-text">@item.Description</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <a type="btn btn-success" asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id"
-                                    class="btn btn-sm btn-outline-secondary">View</a>
-                                    </div>
-                                    <small class="text-muted">9 mins</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-            }
-            </div>
-       </div>
- </div>*@
