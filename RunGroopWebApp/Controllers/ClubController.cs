@@ -16,19 +16,33 @@ namespace RunGroopWebApp.Controllers
             _photoService = photoService;
         }
 
-        public async Task<IActionResult> Index(int pageNumber = 1)
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 6)
         {
-            IEnumerable<Club> clubs = await _clubRepository.GetAll();
+            if (pageNumber < 1 || pageSize < 1)
+            {
+                return NotFound();
+            }
 
-            var clubViewModel = new IndexClubViewModel(clubs, pageNumber, 6);
+            var clubs = await _clubRepository.GetSliceAsync((pageNumber - 1) * pageSize, pageSize);
+            var count = await _clubRepository.GetCountAsync();
+
+            var clubViewModel = new IndexClubViewModel
+            {
+                Clubs = clubs,
+                PageSize = pageSize,
+                PageIndex = pageNumber,
+                TotalClubs = count,
+                TotalPages = (int)Math.Ceiling(count / (double)pageSize),
+            };
 
             return View(clubViewModel);
         }
 
         public async Task<IActionResult> Detail(int id)
         {
-            Club club = await _clubRepository.GetByIdAsync(id);
-            return View(club);
+            var club = await _clubRepository.GetByIdAsync(id);
+
+            return club == null ? NotFound() : View(club);
         }
 
         public IActionResult Create()

@@ -30,20 +30,7 @@
                     </a>
                     <span class="text-muted text-small">Results @resultStart - @resultEnd of @Model.TotalClubs</span>
                 }
-                else
-                {
-                    <span class="text-muted text-small">Not Found</span>
-                }
             </div>
-            <form class="d-flex align-items-center">
-                <span class="mr-2 text-muted text-small text-nowrap">Sort by:</span>
-                <select class="custom-select">
-                    <option value="alpha">Alphabetical</option>
-                    <option value="old-new" selected="">Newest</option>
-                    <option value="new-old">Oldest</option>
-                    <option value="recent">Recently Modified</option>
-                </select>
-            </form>
         </div>
         <ul class="row feature-list feature-list-sm">
             @foreach (var club in Model.Clubs)
@@ -77,5 +64,19 @@
                 </li>
             }
         </ul>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                @if (isValidPage)
+                {
+                    <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" type="button" class="btn btn-sm btn-outline-primary @prevDisabled">
+                        Prev
+                    </a>
+                    <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" type="button" class="btn btn-sm btn-outline-primary @nextDisabled">
+                        Next
+                    </a>
+                    <span class="text-muted text-small">Results @resultStart - @resultEnd of @Model.TotalClubs</span>
+                }
+            </div>
+        </div>
     </div>
 </section>
