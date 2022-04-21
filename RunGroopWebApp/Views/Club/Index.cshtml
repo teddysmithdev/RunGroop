@@ -19,6 +19,9 @@
                             <p class="card-text">@club.Description</p>
                         </div>
                         <div class="card-footer card-footer-borderless d-flex justify-content-between">
+                            <div>
+                                <small>@club.ClubCategory</small>
+                            </div>
                             @if (isAuthenticated && User.IsInRole("admin"))
                             {
                                 <div>
@@ -30,9 +33,6 @@
                                     </a>
                                 </div>
                             }
-                            <div>
-                                <small>@club.ClubCategory</small>
-                            </div>
                         </div>
                     </div>
                 </li>
