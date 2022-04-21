@@ -1,0 +1,58 @@
+﻿@using RunGroopWebApp.ViewModels
+@model HomeUserCreateViewModel
+
+@{
+    ViewData["Title"] = "Register Page";
+}
+
+      <section class="bg-dark space-lg" data-jarallax data-speed="0.2">
+        <img alt="Image" src="/img/photo-road.jpg" class="bg-image position-absolute opacity-20" />
+        <div class="container">
+          <div class="row align-items-center justify-content-between">
+            <div class="col-12 col-md-6 col-lg-5 section-intro">
+              <h1 class="display-3">Find a running group</h1>
+              <span class="lead">
+                A community of devoted runners, passionate about running and life. Ready to find your accountability partner?
+              </span>
+            </div>
+            <!--end of col-->
+            <div class="col-12 col-md-6 col-lg-5">
+              <div class="card">
+                <div class="card-body">
+                  <form asp-action="Register">
+                   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                      <label asp-for="UserName">Username</label>
+                      <input asp-for="UserName" class="form-control form-control-lg" placeholder="Pick a username">
+                      <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                      <label asp-for="Email">Email address</label>
+                      <input asp-for="Email" class="form-control form-control-lg" placeholder="Enter email">
+                      <span asp-validation-for="Email" class="text-danger"></span>
+                      <small id="emailHelp" class="form-text">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                      <label asp-for="Password">Password</label>
+                      <input asp-for="Password" class="form-control form-control-lg" placeholder="Password">
+                      <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" value="agree" name="agree-terms" id="check-agree">
+                        <label class="custom-control-label text-small" for="check-agree">I agree to the <a href="#">Terms &amp; Conditions</a>
+                        </label>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-success btn-block">Sign up for RunGroops</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--end of row-->
+        </div>
+        <!--end of container-->
+      </section>
+      <!--end of section-->
+      

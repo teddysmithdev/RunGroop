@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using RunGroopWebApp.Data;
 using RunGroopWebApp.Helpers;
 using RunGroopWebApp.Interfaces;
 using RunGroopWebApp.Models;
@@ -14,11 +16,16 @@ namespace RunGroopWebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IClubRepository _clubRepository;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
-        public HomeController(ILogger<HomeController> logger, IClubRepository clubRepository)
+        public HomeController(ILogger<HomeController> logger, IClubRepository clubRepository,
+            UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _logger = logger;
             _clubRepository = clubRepository;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public async Task<IActionResult> Index()
@@ -50,6 +57,36 @@ namespace RunGroopWebApp.Controllers
             }
             return View(homeViewModel);
         }
+
+        
+        [HttpPost]
+        public async Task<IActionResult> Register(HomeUserCreateViewModel createVM)
+        {
+            if (!ModelState.IsValid) return View(createVM);
+
+            var user = await _userManager.FindByEmailAsync(createVM.Email);
+            if (user != null)
+            {
+                TempData["Error"] = "This email address is already in use";
+                return View(createVM);
+            }
+
+            var newUser = new AppUser
+            {
+                UserName = createVM.UserName,
+                Email = createVM.Email,
+            };
+
+            var newUserResponse = await _userManager.CreateAsync(newUser, createVM.Password);
+
+            if (newUserResponse.Succeeded)
+            {
+                await _signInManager.SignInAsync(newUser, isPersistent: false);
+                await _userManager.AddToRoleAsync(newUser, UserRoles.User);
+            }
+            return RedirectToAction("Index", "Club");
+        }
+    
 
         public IActionResult Privacy()
         {
