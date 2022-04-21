@@ -9,7 +9,7 @@ Rungroops is an online platform for runners. Find clubs, schedule events, and me
 1. Go into directory where you plan on keeping project and run.
 
 ```bash
-  git clone https://github.com/teddysmithdev/RunGroop.git
+  git fork https://github.com/teddysmithdev/RunGroop.git
 ```
 
 2. Create a local database. (If you are unsure how to do this, watch my Youtube video )
