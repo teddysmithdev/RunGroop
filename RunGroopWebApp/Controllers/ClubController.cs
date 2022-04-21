@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using RunGroopWebApp.Data;
 using RunGroopWebApp.Interfaces;
 using RunGroopWebApp.Models;
 using RunGroopWebApp.ViewModels;
@@ -11,18 +9,20 @@ namespace RunGroopWebApp.Controllers
     {
         private readonly IClubRepository _clubRepository;
         private readonly IPhotoService _photoService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ClubController(IClubRepository clubRepository, IPhotoService photoService, IHttpContextAccessor httpContextAccessor)
+        public ClubController(IClubRepository clubRepository, IPhotoService photoService)
         {
             _clubRepository = clubRepository;
             _photoService = photoService;
-            _httpContextAccessor = httpContextAccessor;
         }
-        public async Task<IActionResult> Index() 
+
+        public async Task<IActionResult> Index(int pageNumber = 1)
         {
             IEnumerable<Club> clubs = await _clubRepository.GetAll();
-            return View(clubs);
+
+            var clubViewModel = new IndexClubViewModel(clubs, pageNumber, 6);
+
+            return View(clubViewModel);
         }
 
         public async Task<IActionResult> Detail(int id)
@@ -33,7 +33,7 @@ namespace RunGroopWebApp.Controllers
 
         public IActionResult Create()
         {
-            var curUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+            var curUserId = HttpContext.User.GetUserId();
             var createClubViewModel = new CreateClubViewModel { AppUserId = curUserId };
             return View(createClubViewModel);
         }
@@ -65,7 +65,7 @@ namespace RunGroopWebApp.Controllers
             {
                 ModelState.AddModelError("", "Photo upload failed");
             }
-            
+
             return View(clubVM);
         }
 
@@ -97,7 +97,7 @@ namespace RunGroopWebApp.Controllers
             var userClub = await _clubRepository.GetByIdAsyncNoTracking(id);
 
             if (userClub != null)
-            { 
+            {
                 try
                 {
                     await _photoService.DeletePhotoAsync(userClub.Image);
@@ -119,9 +119,9 @@ namespace RunGroopWebApp.Controllers
                     Address = clubVM.Address,
                 };
 
-            _clubRepository.Update(club);
+                _clubRepository.Update(club);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             else
             {
@@ -129,11 +129,10 @@ namespace RunGroopWebApp.Controllers
             }
         }
 
-
         public async Task<IActionResult> Delete(int id)
         {
             var clubDetails = await _clubRepository.GetByIdAsync(id);
-            if(clubDetails == null) return View("Error");
+            if (clubDetails == null) return View("Error");
             return View(clubDetails);
         }
 
