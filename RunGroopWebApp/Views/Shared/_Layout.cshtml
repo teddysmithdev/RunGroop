@@ -45,27 +45,27 @@
                   <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown">Dashboard</a>
                   <div class="dropdown-menu" aria-labelledby="pagesDropdown">
 
-                    <a class="dropdown-item" href="pages-landing.html">
-                      <span class="h6 mb-0">Create Club</span>
+                    <a class="dropdown-item" asp-area="" asp-controller="Club" asp-action="Create">
+                      <span class="h6 mb-0" >Create Club</span>
                     </a>
 
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" href="pages-app.html">
-                      <span class="h6 mb-0">Create Race</span>
+                    <a class="dropdown-item" asp-area="" asp-controller="Race" asp-action="Create">
+                      <span class="h6 mb-0" >Create Race</span>
                     </a>
 
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" href="pages-inner.html">
+                    <a class="dropdown-item" asp-area="" asp-controller="Club" asp-action="Create">
                       <span class="h6 mb-0">Edit User Profile</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="pages-inner.html">
+                    <a class="dropdown-item" asp-area="" asp-controller="Dashboard" asp-action="Index">
                       <span class="h6 mb-0">Manage Your Clubs/Races</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="pages-inner.html">
+                    <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">
                       <span class="h6 mb-0">Logout</span>
                     </a>
                   </div>
