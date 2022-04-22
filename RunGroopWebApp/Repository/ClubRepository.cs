@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RunGroopWebApp.Data;
+using RunGroopWebApp.Data.Enum;
 using RunGroopWebApp.Interfaces;
 using RunGroopWebApp.Models;
 
@@ -34,6 +35,20 @@ namespace RunGroopWebApp.Repository
         public async Task<IEnumerable<Club>> GetSliceAsync(int offset, int size)
         {
             return await _context.Clubs.Skip(offset).Take(size).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Club>> GetClubsByCategoryAndSliceAsync(ClubCategory category, int offset, int size)
+        {
+            return await _context.Clubs
+                .Where(c => c.ClubCategory == category)
+                .Skip(offset)
+                .Take(size)
+                .ToListAsync();
+        }
+
+        public async Task<int> GetCountByCategoryAsync(ClubCategory category)
+        {
+            return await _context.Clubs.CountAsync(c => c.ClubCategory == category);
         }
 
         public async Task<Club?> GetByIdAsync(int id)
