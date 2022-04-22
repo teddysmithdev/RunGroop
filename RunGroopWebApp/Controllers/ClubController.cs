@@ -52,7 +52,6 @@ namespace RunGroopWebApp.Controllers
             return View(clubViewModel);
         }
 
-
         [HttpGet]
         [Route("RunningClubs/{state}")]
         public async Task<IActionResult> ListClubsByState(string state)
@@ -62,7 +61,7 @@ namespace RunGroopWebApp.Controllers
             {
                 Clubs = clubs
             };
-            if(clubs.Count() == 0)
+            if (clubs.Count() == 0)
             {
                 clubVM.NoClubWarning = true;
             }
@@ -161,6 +160,7 @@ namespace RunGroopWebApp.Controllers
                     Title = clubVM.Title,
                     Description = clubVM.Description,
                     Image = result.Url.ToString(),
+                    ClubCategory = clubVM.ClubCategory,
                     AppUserId = clubVM.AppUserId,
                     Address = new Address
                     {

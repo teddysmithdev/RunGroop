@@ -1,17 +1,60 @@
-﻿@model IEnumerable<Race>
+﻿@using RunGroopWebApp.Data.Enum
+@using RunGroopWebApp.ViewModels
+@model IndexRaceViewModel
 
 @{
     bool isAuthenticated = User.Identity?.IsAuthenticated == true;
+
+    int resultStart = ((Model.Page - 1) * Model.PageSize) + 1;
+    int resultEnd = Math.Min(resultStart + Model.PageSize - 1, Model.TotalRaces);
+
+    bool isValidPage = resultStart <= Model.TotalRaces;
+
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
+
 
 <section class="space-sm flush-with-above">
     <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <p>Races Categories</p>
+                <div class="mb-3">
+                    <a type="button" class="btn btn-secondary mb-1"
+                       asp-action="Index" asp-route-page="1" asp-route-category="-1">All</a>
+                    @foreach (var category in Html.GetEnumSelectList<RaceCategory>())
+                    {
+                        <a type="button" class="btn btn-secondary mb-1"
+                       asp-action="Index" asp-route-page="1" asp-route-category="@category.Value">@category.Text</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                @if (isValidPage)
+                {
+                    <a type="button" class="btn btn-sm btn-outline-primary @prevDisabled"
+                   asp-action="Index" asp-route-page="@(Model.Page - 1)" asp-route-category="@Model.Category">
+                        Prev
+                    </a>
+                    <a type="button" class="btn btn-sm btn-outline-primary @nextDisabled"
+                   asp-action="Index" asp-route-page="@(Model.Page + 1)" asp-route-category="@Model.Category">
+                        Next
+                    </a>
+                    <span class="text-muted text-small">Results @resultStart - @resultEnd of @Model.TotalRaces</span>
+                }
+            </div>
+        </div>
         <ul class="row feature-list feature-list-sm">
-            @foreach (var race in Model)
+            @foreach (var race in Model.Races)
             {
                 <li class="col-12 col-md-6 col-lg-4">
                     <div class="card">
-                        <a type="button" asp-controller="Club" asp-action="Detail" asp-route-id="@race.Id">
+                        <a type="button" asp-controller="Race" asp-action="Detail" asp-route-id="@race.Id">
                             <img class="card-img-top" src="@race.Image" alt="Card image cap">
                         </a>
                         <div class="card-body">
@@ -38,5 +81,21 @@
                 </li>
             }
         </ul>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                @if (isValidPage)
+                {
+                    <a type="button" class="btn btn-sm btn-outline-primary @prevDisabled"
+                   asp-action="Index" asp-route-page="@(Model.Page - 1)" asp-route-category="@Model.Category">
+                        Prev
+                    </a>
+                    <a type="button" class="btn btn-sm btn-outline-primary @nextDisabled"
+                   asp-action="Index" asp-route-page="@(Model.Page + 1)" asp-route-category="@Model.Category">
+                        Next
+                    </a>
+                    <span class="text-muted text-small">Results @resultStart - @resultEnd of @Model.TotalRaces</span>
+                }
+            </div>
+        </div>
     </div>
 </section>
