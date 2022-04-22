@@ -105,7 +105,20 @@ namespace RunGroopWebApp.Controllers
 
         [HttpGet]
         [Route("RunningClubs/State")]
-        public async Task<IActionResult> RunningClubsByStateDirectory(int id)
+        public async Task<IActionResult> RunningClubsByStateDirectory()
+        {
+            var states = await _clubRepository.GetAllStates();
+            var clubVM = new RunningClubByState()
+            {
+                States = states
+            };
+
+            return states == null ? NotFound() : View(clubVM);
+        }
+
+        [HttpGet]
+        [Route("RunningClubs/State/City")]
+        public async Task<IActionResult> RunningClubsByStateForCityDirectory()
         {
             var states = await _clubRepository.GetAllStates();
             var clubVM = new RunningClubByState()

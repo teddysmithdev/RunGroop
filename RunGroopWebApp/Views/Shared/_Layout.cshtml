@@ -116,16 +116,20 @@
                   <h6>Navigate</h6>
                   <ul class="list-unstyled">
                     <li>
-                      <a href="index.html">Home</a>
+                                            <a  asp-area="" asp-controller="Home"
+                                    asp-action="Index">Home</a>
                     </li>
                     <li>
-                      <a href="pages-landing.html">Find Runners Near You</a>
+                                            <a  asp-area="" asp-controller="Users"
+                                    asp-action="Index">Find Runners Near You</a>
                     </li>
                     <li>
-                      <a href="pages-app.html">Find Running Clubs</a>
+                                            <a  asp-area="" asp-controller="Club"
+                                    asp-action="Index">Find Running Clubs Near You</a>
                     </li>
                     <li>
-                      <a href="pages-inner.html">Find Running Races</a>
+                                            <a  asp-area="" asp-controller="Race"
+                                    asp-action="Index">Find Running Races Near You</a>
                     </li>
                   </ul>
                 </div>
@@ -134,11 +138,12 @@
                   <h6>Club Directory</h6>
                   <ul class="list-unstyled">
                     <li>
-                      <a href="#">Find Running Clubs By City</a>
+                      <a  asp-area="" asp-controller="Club"
+                                    asp-action="RunningClubsByStateDirectory">Find Running Clubs By State</a>
                     </li>
                     <li>
                       <a  asp-area="" asp-controller="Club"
-                                    asp-action="RunningClubsByStateDirectory">Find Running Clubs By State</a>
+                                    asp-action="RunningClubsByStateForCityDirectory">Find Running Clubs By City</a>
                     </li>
                   </ul>
                 </div>
