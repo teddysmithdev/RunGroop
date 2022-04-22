@@ -97,170 +97,78 @@
         </main>
     </div>
 
-    <footer class="bg-gray text-light footer-long">
+         <footer class="bg-gray text-light footer-long">
         <div class="container">
           <div class="row">
             <div class="col-12 col-md-3">
-              <a class="text" asp-area="" asp-controller="Home" asp-action="Index" id="logo-text">RunGroops</a>
+              <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" id="logo-text">RunGroops</a>
+              <p class="text-muted">
+                &copy; 2022 RunGroops
+                <br />
+                <br />
+              </p>
             </div>
             <!--end of col-->
             <div class="col-12 col-md-9">
-              <span class="h5">The world's first online platform for runners.</span>
+              <span class="h5">The world's first online platform for runners</span>
               <div class="row no-gutters">
                 <div class="col-6 col-lg-3">
-                  <h6>Find Runnings Clubs</h6>
+                  <h6>Navigate</h6>
                   <ul class="list-unstyled">
                     <li>
-                      <a href="index.html">Runnings clubs in New York</a>
+                      <a href="index.html">Home</a>
                     </li>
                     <li>
-                      <a href="pages-landing.html">Runnings clubs in California</a>
+                      <a href="pages-landing.html">Find Runners Near You</a>
                     </li>
                     <li>
-                      <a href="pages-app.html">Runnings clubs in Texas</a>
+                      <a href="pages-app.html">Find Running Clubs</a>
                     </li>
                     <li>
-                      <a href="pages-inner.html">Runnings clubs in Florida</a>
-                    </li>
-                                 <li>
-                      <a href="index.html">Runnings clubs in Pennsyvania</a>
-                    </li>
-                    <li>
-                      <a href="pages-landing.html">Runnings clubs in Illinois</a>
-                    </li>
-                    <li>
-                      <a href="pages-app.html">Runnings clubs in Ohio</a>
-                    </li>
-                    <li>
-                      <a href="pages-inner.html">Runnings clubs in Georgia</a>
-                    </li>
-                                        <li>
-                      <a href="pages-landing.html">Runnings clubs in North Carolina</a>
-                    </li>
-                    <li>
-                      <a href="pages-app.html">Runnings clubs in Michigan</a>
-                    </li>
-                    <li>
-                      <a href="pages-inner.html">Runnings clubs in Georgia</a>
+                      <a href="pages-inner.html">Find Running Races</a>
                     </li>
                   </ul>
                 </div>
                 <!--end of col-->
                 <div class="col-6 col-lg-3">
-                  <br />
-                  <br />
+                  <h6>Club Directory</h6>
                   <ul class="list-unstyled">
-                                        <li>
-                      <a href="index.html">Runnings clubs in Michigan</a>
+                    <li>
+                      <a href="#">Find Running Clubs By City</a>
                     </li>
                     <li>
-                      <a href="pages-landing.html">Runnings clubs in New Jersey</a>
-                    </li>
-                    <li>
-                      <a href="pages-app.html">Runnings clubs in Virginia</a>
-                    </li>
-                    <li>
-                      <a href="pages-inner.html">Runnings clubs in Washington</a>
-                    </li>
-                                 <li>
-                      <a href="index.html">Runnings clubs in Arizona</a>
-                    </li>
-                    <li>
-                      <a href="pages-landing.html">Runnings clubs in Tennessee</a>
-                    </li>
-                    <li>
-                      <a href="pages-app.html">Runnings clubs in Masschusettts</a>
-                    </li>
-                    <li>
-                      <a href="pages-inner.html">Runnings clubs in Indiana</a>
-                    </li>
-                                        <li>
-                      <a href="pages-landing.html">Runnings clubs in Missouri</a>
-                    </li>
-                    <li>
-                      <a href="pages-app.html">Runnings clubs in Maryland</a>
-                    </li>
-                    <li>
-                      <a href="pages-inner.html">Runnings clubs in Colorado</a>
+                      <a  asp-area="" asp-controller="Club"
+                                    asp-action="RunningClubsByStateDirectory">Find Running Clubs By State</a>
                     </li>
                   </ul>
                 </div>
                 <!--end of col-->
                 <div class="col-6 col-lg-3">
-                  <h6>Find Runnings Races</h6>
+                  <h6>Race Directory</h6>
                   <ul class="list-unstyled">
-                                        <li>
-                      <a href="index.html">Runnings races in New York</a>
+                    <li>
+                      <a href="#">Find Running Races By City</a>
                     </li>
                     <li>
-                      <a href="pages-landing.html">Runnings races in California</a>
-                    </li>
-                    <li>
-                      <a href="pages-app.html">Runnings races in Texas</a>
-                    </li>
-                    <li>
-                      <a href="pages-inner.html">Runnings races in Florida</a>
-                    </li>
-                                 <li>
-                      <a href="index.html">Runnings races in Pennsyvania</a>
-                    </li>
-                    <li>
-                      <a href="pages-landing.html">Runnings races in Illinois</a>
-                    </li>
-                    <li>
-                      <a href="pages-app.html">Runnings races in Ohio</a>
-                    </li>
-                    <li>
-                      <a href="pages-inner.html">Runnings races in Georgia</a>
-                    </li>
-                                        <li>
-                      <a href="pages-landing.html">Runnings races in North Carolina</a>
-                    </li>
-                    <li>
-                      <a href="pages-app.html">Runnings races in Michigan</a>
-                    </li>
-                    <li>
-                      <a href="pages-inner.html">Runnings races in Georgia</a>
+                      <a href="#">Find Running Races By State</a>
                     </li>
                   </ul>
                 </div>
                 <!--end of col-->
                 <div class="col-6 col-lg-3">
-                  <br />
-                  <br />
+                  <h6>Social</h6>
                   <ul class="list-unstyled">
-                                                           <li>
-                      <a href="index.html">Runnings races in Michigan</a>
+                    <li>
+                      <a href="#">Youtube</a>
                     </li>
                     <li>
-                      <a href="pages-landing.html">Runnings races in New Jersey</a>
+                      <a href="#">Facebook</a>
                     </li>
                     <li>
-                      <a href="pages-app.html">Runnings races in Virginia</a>
+                      <a href="#">Twitter</a>
                     </li>
                     <li>
-                      <a href="pages-inner.html">Runnings races in Washington</a>
-                    </li>
-                                 <li>
-                      <a href="index.html">Runnings races in Arizona</a>
-                    </li>
-                    <li>
-                      <a href="pages-landing.html">Runnings races in Tennessee</a>
-                    </li>
-                    <li>
-                      <a href="pages-app.html">Runnings races in Masschusettts</a>
-                    </li>
-                    <li>
-                      <a href="pages-inner.html">Runnings races in Indiana</a>
-                    </li>
-                                        <li>
-                      <a href="pages-landing.html">Runnings races in Missouri</a>
-                    </li>
-                    <li>
-                      <a href="pages-app.html">Runnings races in Maryland</a>
-                    </li>
-                    <li>
-                      <a href="pages-inner.html">Runnings races in Colorado</a>
+                      <a href="#">Instagram</a>
                     </li>
                   </ul>
                 </div>
@@ -274,6 +182,7 @@
         </div>
         <!--end of container-->
       </footer>
+    </div>
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/bootstrap.js"></script>
     <script src="~/js/theme.js"></script>

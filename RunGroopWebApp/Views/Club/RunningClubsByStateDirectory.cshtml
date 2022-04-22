@@ -1,0 +1,18 @@
+﻿@using RunGroopWebApp.ViewModels
+@model RunningClubByState
+
+
+<div class="col-6 col-lg-3">
+                  <h6>Race Directory</h6>
+              
+@foreach(var val in Model.States)
+{
+    <ul class="list-unstyled">
+                    <li>
+    <a asp-controller="Club" asp-action="RunningClubsByCityDirectory" asp-route-state="@val.StateName">Running club in @val.StateName</a>
+    </li>
+    </ul>
+}
+<
+
+

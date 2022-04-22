@@ -32,6 +32,11 @@ namespace RunGroopWebApp.Repository
             return await _context.Clubs.ToListAsync();
         }
 
+        public async Task<List<State>> GetAllStates()
+        {
+            return await _context.States.ToListAsync();
+        }
+
         public async Task<IEnumerable<Club>> GetSliceAsync(int offset, int size)
         {
             return await _context.Clubs.Skip(offset).Take(size).ToListAsync();
@@ -63,7 +68,7 @@ namespace RunGroopWebApp.Repository
 
         public async Task<IEnumerable<Club>> GetClubByCity(string city)
         {
-            return await _context.Clubs.Where(c => c.Address.City.Contains(city)).ToListAsync();
+            return await _context.Clubs.Where(c => c.Address.City.Contains(city)).Distinct().ToListAsync();
         }
 
         public bool Save()
@@ -81,6 +86,16 @@ namespace RunGroopWebApp.Repository
         public async Task<int> GetCountAsync()
         {
             return await _context.Clubs.CountAsync();
+        }
+
+        public async Task<IEnumerable<Club>> GetClubsByState(string state)
+        {
+            return await _context.Clubs.Where(c => c.Address.State.Contains(state)).ToListAsync();
+        }
+
+        public async Task<List<City>> GetAllCitiesByState(string state)
+        {
+            return await _context.Cities.Where(c => c.StateCode.Contains(state)).ToListAsync();
         }
     }
 }

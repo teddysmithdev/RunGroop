@@ -1,0 +1,54 @@
+﻿@using RunGroopWebApp.ViewModels
+@model ListClubByStateViewModel
+
+@{
+    bool isAuthenticated = User.Identity?.IsAuthenticated == true;
+}
+
+<section class="space-sm flush-with-above">
+    <div class="container">
+        @if(Model.NoClubWarning == true)
+        {
+            <h1 class="fw-light">There are no running clubs in your area! <a asp-area="" asp-controller="Account"
+                    asp-action="Login">Login</a> and create one!</h1>
+        }
+        else
+        {
+            <h1>Running Clubs in @Model.State</h1>
+        }
+        <ul class="row feature-list feature-list-sm">
+            @foreach (var club in Model.Clubs)
+            {
+                <li class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <a type="button" asp-controller="Club" asp-action="Detail" asp-route-id="@club.Id">
+                            <img class="card-img-top" src="@club.Image" alt="Card image cap">
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title">@club.Title</h4>
+                            <p class="card-text">@club.Description</p>
+                        </div>
+                        <div class="card-footer card-footer-borderless d-flex justify-content-between">
+                            <div>
+                                <small>@club.ClubCategory</small>
+                            </div>
+                            @if (isAuthenticated && User.IsInRole("admin"))
+                            {
+                                <div>
+                                    <a type="button" class="btn btn-sm btn-outline-info" asp-controller="Club" asp-action="Edit" asp-route-id="@club.Id">
+                                        Edit
+                                    </a>
+                                    <a type="button" class="btn btn-sm btn-outline-danger" asp-controller="Club" asp-action="Delete" asp-route-id="@club.Id">
+                                        Delete
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+    <a asp-area="" asp-controller="Club"
+                    asp-action="ListClubsByCity" asp-route-state="North Carolina" asp-route-city="Charlotte">Runnings Clubs in Charlotte, NC</a>
+</section>

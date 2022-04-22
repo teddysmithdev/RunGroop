@@ -29,7 +29,7 @@ namespace RunGroopWebApp.Tests.Controller
             _httpContextAccessor = A.Fake<HttpContextAccessor>();
 
             //SUT
-            _clubController = new ClubController(_clubRepository, _photoService, _httpContextAccessor);
+            _clubController = new ClubController(_clubRepository, _photoService);
         }
 
         [Fact]
