@@ -1,4 +1,5 @@
-﻿using RunGroopWebApp.Models;
+﻿using RunGroopWebApp.Data.Enum;
+using RunGroopWebApp.Models;
 
 namespace RunGroopWebApp.Interfaces
 {
@@ -8,6 +9,8 @@ namespace RunGroopWebApp.Interfaces
 
         Task<IEnumerable<Club>> GetSliceAsync(int offset, int size);
 
+        Task<IEnumerable<Club>> GetClubsByCategoryAndSliceAsync(ClubCategory category, int offset, int size);
+
         Task<Club?> GetByIdAsync(int id);
 
         Task<Club?> GetByIdAsyncNoTracking(int id);
@@ -15,6 +18,8 @@ namespace RunGroopWebApp.Interfaces
         Task<IEnumerable<Club>> GetClubByCity(string city);
 
         Task<int> GetCountAsync();
+
+        Task<int> GetCountByCategoryAsync(ClubCategory category);
 
         bool Add(Club club);
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RunGroopWebApp.Data.Enum;
 using RunGroopWebApp.Interfaces;
 using RunGroopWebApp.Models;
 using RunGroopWebApp.ViewModels;
@@ -16,23 +17,34 @@ namespace RunGroopWebApp.Controllers
             _photoService = photoService;
         }
 
-        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 6)
+        public async Task<IActionResult> Index(int category = -1, int page = 1, int pageSize = 6)
         {
-            if (pageNumber < 1 || pageSize < 1)
+            if (page < 1 || pageSize < 1)
             {
                 return NotFound();
             }
 
-            var clubs = await _clubRepository.GetSliceAsync((pageNumber - 1) * pageSize, pageSize);
-            var count = await _clubRepository.GetCountAsync();
+            // if category is -1 (All) dont filter else filter by selected category
+            var clubs = category switch
+            {
+                -1 => await _clubRepository.GetSliceAsync((page - 1) * pageSize, pageSize),
+                _ => await _clubRepository.GetClubsByCategoryAndSliceAsync((ClubCategory)category, (page - 1) * pageSize, pageSize),
+            };
+
+            var count = category switch
+            {
+                -1 => await _clubRepository.GetCountAsync(),
+                _ => await _clubRepository.GetCountByCategoryAsync((ClubCategory)category),
+            };
 
             var clubViewModel = new IndexClubViewModel
             {
                 Clubs = clubs,
+                Page = page,
                 PageSize = pageSize,
-                PageIndex = pageNumber,
                 TotalClubs = count,
                 TotalPages = (int)Math.Ceiling(count / (double)pageSize),
+                Category = category,
             };
 
             return View(clubViewModel);
