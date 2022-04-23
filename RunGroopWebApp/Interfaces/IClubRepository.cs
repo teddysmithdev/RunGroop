@@ -13,6 +13,8 @@ namespace RunGroopWebApp.Interfaces
 
         Task<IEnumerable<Club>> GetClubsByCategoryAndSliceAsync(ClubCategory category, int offset, int size);
 
+        Task<IEnumerable<Club>> GetClubsByUserId(string userId);
+
         Task<List<State>> GetAllStates();
 
         Task<List<City>> GetAllCitiesByState(string state);

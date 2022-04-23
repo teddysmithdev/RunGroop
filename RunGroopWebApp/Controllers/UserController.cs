@@ -7,10 +7,14 @@ namespace RunGroopWebApp.Controllers
     public class UserController : Controller
     {
         private readonly IUserRepository _userRepository;
+        private readonly IClubRepository _clubRepository;
+        private readonly IRaceRepository _raceRepository;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository, IClubRepository clubRepository, IRaceRepository raceRepository)
         {
             _userRepository = userRepository;
+            _clubRepository = clubRepository;
+            _raceRepository = raceRepository;
         }
 
         [HttpGet("users")]
@@ -43,10 +47,13 @@ namespace RunGroopWebApp.Controllers
                 return RedirectToAction("Index", "Users");
             }
 
+            var clubs = await _clubRepository.GetClubsByUserId(id);
+
             var userDetailViewModel = new UserDetailViewModel()
             {
                 Id = user.Id,
                 Pace = user.Pace,
+                Clubs = clubs,
                 City = user.City,
                 State = user.State,
                 Mileage = user.Mileage,

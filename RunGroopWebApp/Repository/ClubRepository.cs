@@ -97,5 +97,10 @@ namespace RunGroopWebApp.Repository
         {
             return await _context.Cities.Where(c => c.StateCode.Contains(state)).ToListAsync();
         }
+
+        public async Task<IEnumerable<Club>> GetClubsByUserId(string userId)
+        {
+            return await _context.Clubs.Where(c => c.AppUserId == userId).ToListAsync();
+        }
     }
 }

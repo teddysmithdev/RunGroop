@@ -10,6 +10,7 @@ public class UserDetailViewModel
     public int? Mileage { get; set; }
     public string? City { get; set; }
     public string? State { get; set; }
+    public IEnumerable<Club> Clubs { get; set; }
     public string ProfileImageUrl { get; set; }
 
     public string Location => (City, State) switch
