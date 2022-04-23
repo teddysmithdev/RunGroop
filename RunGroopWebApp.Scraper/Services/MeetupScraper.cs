@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using RunGroopWebApp.Data.Enum;
+using RunGroopWebApp.Extensions;
 using RunGroopWebApp.Models;
 using RunGroopWebApp.Scraper.Data;
 using System;
@@ -32,10 +33,10 @@ namespace RunGroopWebApp.Scraper.Services
             while(!done)
             using (var context = new ScraperDBContext())
             {
-               var cities = context.Cities.OrderBy(x => x.Id).Where(c => c.StateCode.Contains("NC")).Skip(currentBatch++ * batchSize).Take(batchSize).ToList();
+               var cities = context.Cities.OrderBy(x => x.Id).Skip(currentBatch++ * batchSize).Take(batchSize).ToList();
                 foreach(var city in cities)
                 {
-                    IterateOverRunningClubs(city.CityName.ToLower(),city.StateCode.ToLower());
+                    IterateOverRunningClubs(city.StateCode.ToLower(), city.CityName.ToLower());
                     if(city.Id == 40000)
                     {
                        done = true;
@@ -49,8 +50,8 @@ namespace RunGroopWebApp.Scraper.Services
         {
             try
             {
-                _driver.Navigate().GoToUrl($"https://www.meetup.com/find/?suggested=true&source=GROUPS&keywords=running%20club&location=us--{city}--{state}");
-                System.Threading.Thread.Sleep(1000);
+                _driver.Navigate().GoToUrl($"https://www.meetup.com/find/?suggested=true&source=GROUPS&keywords=running%20club&location=us--{state}--{city}");
+                //System.Threading.Thread.Sleep(1000);
                 var pageElements = _driver.FindElements(By.CssSelector("h3[data-testid='group-card-title']"));
                 for (int i = 0; i < pageElements.Count; i++)
                 {
@@ -70,7 +71,7 @@ namespace RunGroopWebApp.Scraper.Services
                                 Address = new Address()
                                 {
                                     State = state.ToUpper(),
-                                    City = city.ToUpperInvariant(),
+                                    City = city.FirstCharToUpper()
                                 },
                                 ClubCategory = ClubCategory.City
                             };
