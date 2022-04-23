@@ -7,12 +7,39 @@
 
 <section class="container">
     <h1>Find running clubs in your city</h1>
+    <div class="row">
+        <form class="card card-sm">
+            <div class="card-body row no-gutters align-items-center">
+                <div class="col-auto">
+                    <i class="icon-magnifying-glass h4 text-body"></i>
+                </div>
+                <!--end of col-->
+                <div class="col">
+                    <input class="form-control form-control-sm form-control-borderless" type="search" placeholder="Search state" oninput="filterList(this.value);">
+                </div>
+            </div>
+        </form>
+        <!--end of col-->
+    </div>
     <ul class="list-unstyled">
         @foreach (var val in cities)
         {
-            <li>
-                <a asp-controller="Club" asp-action="ListClubsByCity" asp-route-state="@val.StateCode" asp-route-city="@val.CityName">@val.CityName, @val.StateCode</a>
+            <li class="li-item">
+                <a asp-controller="Club" asp-action="ListClubsByCity" asp-route-state="@val.StateCode" asp-route-city="@val.CityName">@val.CityName</a>
             </li>
         }
     </ul>
 </section>
+
+<script type="text/javascript">
+    const elements = [...document.getElementsByClassName("li-item")]
+        .map(elem => ({elem, text: elem.querySelector("a").innerText.toUpperCase()}));
+
+    function filterList(search) {
+        const term = search.toUpperCase();
+
+        for (const {elem, text} of elements) {
+            elem.style.display = text.includes(term) ? "" : "none";
+        }
+    }
+</script>
