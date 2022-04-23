@@ -12,9 +12,11 @@ using RunGroopWebApp.Scraper.Services;
 
 
 
+MeepUpClient client = new MeepUpClient();
+
+client.SendRequest();
+
+//AtraScraper scraper = new AtraScraper();
 
 
-AtraScraper scraper = new AtraScraper();
-
-
-scraper.Run();
+//scraper.Run();

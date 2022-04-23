@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="GraphQL.Client" Version="4.0.2" />
+    <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="4.0.2" />
+    <PackageReference Include="GraphQL.NewtonsoftJson" Version="5.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Selenium.WebDriver" Version="4.1.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="100.0.4896.6000" />
   </ItemGroup>

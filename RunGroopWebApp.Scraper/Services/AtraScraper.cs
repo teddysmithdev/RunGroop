@@ -6,6 +6,7 @@ using RunGroopWebApp.Interfaces;
 using RunGroopWebApp.Models;
 using RunGroopWebApp.Repository;
 using RunGroopWebApp.Scraper.Data;
+using RunGroopWebApp.Scraper.Extensions;
 using RunGroopWebApp.Scraper.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -26,46 +27,68 @@ namespace RunGroopWebApp.Scraper.Services
 
         public void Run()
         {
-            IterateOverElements();
+            IterateOverRaceElements();
         }
 
         public IReadOnlyCollection<IWebElement> GetElements()
         {
-            _driver.Navigate().GoToUrl("https://trailrunner.com/race-calendar/");
             return _driver.FindElements(By.CssSelector("span[itemprop='name']"));
         }
 
-        public object IterateOverElements()
+        public void IterateOverRaceElements()
         {
-            var elements = GetElements();
-            foreach (var element in elements)
+            _driver.Navigate().GoToUrl("https://trailrunner.com/race-calendar/");
+            var pageNumbers = _driver.FindElements(By.CssSelector("a[class='page-numbers']"));
+            for (int i = 0; i < pageNumbers.Count; i++)
             {
-                element.Click();
-                var race = new Race()
-                {
-                    Title = _driver.FindElement(By.CssSelector("h1[class='event-title']")).Text,
-                    Description = _driver.FindElement(By.CssSelector("div[class='content-desc']")).Text,
-                    StartTime = DateTime.Parse(_driver.FindElement(By.CssSelector("meta[itemprop='startDate']")).Text),
-                    EntryFee = _driver.FindElement(By.CssSelector("span[itemprop='price']")).Text,
-                    Website = _driver.FindElement(By.CssSelector("span[itemprop='price']")).Text,
-                    Facebook = _driver.FindElement(By.CssSelector("span[itemprop='price']")).Text,
-                    Contact = _driver.FindElement(By.CssSelector("span[itemprop='price']")).Text,
-                    Address = new Address()
-                    {  
-                        City = _driver.FindElement(By.CssSelector("span[itemprop='price']")).Text,
-                        State = _driver.FindElement(By.CssSelector("span[itemprop='price']")).Text,
-                        Street = _driver.FindElement(By.CssSelector("span[itemprop='price']")).Text,
-                    },
-                    RaceCategory = RaceCategory.Ultra
-                };
-                using (var context = new ScraperDBContext())
-                {
-                    context.Races.Add(race);
-                    context.SaveChanges();
+                    if(i >= 1)
+                    {
+                        pageNumbers = _driver.FindElements(By.CssSelector("a[class='page-numbers']"));
+                        pageNumbers.ElementAt(i).Click();
+                    }
+                    var pageElements = GetElements();
+                    for (int j = 0; j < pageElements.Count; j++)
+                    {
+                        try
+                        {
+                            pageElements = _driver.FindElements(By.CssSelector("span[itemprop='name']"));
+                            var element = pageElements.ElementAt(j);
+                            element.Click();
+                            var race = new Race()
+                            {
+                                Title = _driver.FindElement(By.CssSelector("h1[class='event-title']")).Text ?? "",
+                                Description = _driver.FindElement(By.CssSelector("div[class='content-desc']")).Text.Replace("Description:", "") ?? "",
+                                StartTime = _driver.FindElement(By.CssSelector("meta[itemprop='startDate']")).GetAttribute("content").ToDate() ?? DateTime.MinValue,
+                                EntryFee = int.Parse(_driver.FindElement(By.CssSelector("span[itemprop='price']")).Text),
+                                Website = _driver.FindElement(By.LinkText("Visit Event Website")).GetAttribute("href") ?? "",
+                                Twitter = _driver.FindElement(By.LinkText("Event Twitter feed")).GetAttribute("href") ?? "",
+                                Facebook = _driver.FindElement(By.LinkText("Event Facebook page")).GetAttribute("href") ?? "",
+                                Contact = _driver.FindElement(By.LinkText("Contact Race Director")).GetAttribute("href") ?? "",
+                                Address = new Address()
+                                {
+                                    City = _driver.FindElement(By.CssSelector("span[itemprop='addressLocality']")).Text ?? "",
+                                    State = _driver.FindElement(By.CssSelector("span[itemprop='addressRegion']")).Text ?? "",
+                                    Street = _driver.FindElement(By.CssSelector("div[itemprop='address']")).Text ?? "",
+                                },
+                                RaceCategory = RaceCategory.Ultra
+                            };
+                            using (var context = new ScraperDBContext())
+                            {
+                                if (!context.Races.Any(r => r.Title == race.Title))
+                                {
+                                    context.Races.Add(race);
+                                    context.SaveChanges();
+                                }
+                            }
+                            _driver.Navigate().Back();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.Error.WriteLine(ex.Message);
+                            _driver.Navigate().Back();
+                        }
                 }
-                _driver.Close();
             }
-            return "Test";
         }
     }
 }

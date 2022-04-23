@@ -10,7 +10,7 @@ namespace RunGroopWebApp.Scraper.Interfaces
     internal interface IAtraScraper
     {
         IReadOnlyCollection<IWebElement> GetElements();
-        object IterateOverElements();
+        void IterateOverRaceElements();
         void Run();
     }
 }

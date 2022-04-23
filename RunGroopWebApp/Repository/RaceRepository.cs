@@ -59,7 +59,7 @@ namespace RunGroopWebApp.Repository
 
         public async Task<IEnumerable<Race>> GetSliceAsync(int offset, int size)
         {
-            return await _context.Races.Skip(offset).Take(size).ToListAsync();
+            return await _context.Races.Include(a => a.Address).Skip(offset).Take(size).ToListAsync();
         }
 
         public async Task<IEnumerable<Race>> GetRacesByCategoryAndSliceAsync(RaceCategory category, int offset, int size)
