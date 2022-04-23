@@ -1,46 +1,43 @@
 ﻿@using RunGroopWebApp.ViewModels
 @model List<UserViewModel>
 
-
-<section class="space-sm flush-with-above">
+<section class="flush-with-above">
     <div class="container">
-        <ul class="row feature-list feature-list-sm">
-            @foreach (var item in Model)
-            {
-                <li class="col-12 col-md-6 col-lg-4">
-                     <div class="card">
-                    <a href="#">
-                      <img class="card-img-top" src="@item.ProfileImageUrl" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                      <a href="#">
-                        <h4 class="card-title">@item.UserName</h4>
-                        <p class="card-text text-body">@item.Pace</p>
-                      </a>
-                    </div>
-                    <div class="card-footer card-footer-borderless d-flex justify-content-between">
-                      <div class="text-small">
-                        <ul class="list-inline">
-                          <li class="list-inline-item"><i class="icon-heart"></i> 221</li>
-                          <li class="list-inline-item"><i class="icon-message"></i> 14</li>
-                        </ul>
-                      </div>
-                      <div class="dropup">
-                        <a type="btn btn-success" asp-controller="User" asp-action="Detail" asp-route-id="@item.Id"
-                                    class="btn btn-sm btn-outline-secondary">View</a>
-                        <div class="dropdown-menu dropdown-menu-sm" aria-labelledby="SidekickButton">
-                          <a class="dropdown-item" href="#">Save</a>
-                          <a class="dropdown-item" href="#">Share</a>
-                          <a class="dropdown-item" href="#">Comment</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#">Report</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-            }
-        </ul>
+        <div class="row">
+            <div class="col">
+                <table class="table table-hover align-items-center table-borderless">
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr class="bg-white">
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <img alt="Image profile avatar" src="@user.ProfileImageUrl" class="avatar">
+                                        <div class="media-body">
+                                            <span class="h6 mb-0">@user.UserName</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td>Pace @user.Pace</td>
+                                <td>Mileage @user.Mileage</td>
+                                <td><i class="icon-location"></i>@user.Location</td>
+                                <td>
+                                    <a class="btn btn-outline-primary" asp-controller="User" asp-action="Detail" asp-route-id="@user.Id">
+                                        View
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="table-divider">
+                                <th></th>
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!--end of col-->
+        </div>
+        <!--end of row-->
     </div>
+    <!--end of container-->
 </section>
-      </div>
