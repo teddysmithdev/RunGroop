@@ -66,6 +66,7 @@ namespace RunGroopWebApp.Repository
         {
             return await _context.Races
                 .Where(r => r.RaceCategory == category)
+                .Include(a => a.Address)
                 .Skip(offset)
                 .Take(size)
                 .ToListAsync();
