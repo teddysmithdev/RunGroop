@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunGroopWebApp", "RunGroopWebApp\RunGroopWebApp.csproj", "{4E3B4BC1-B408-4BF8-AE2D-C484FE2A8D0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunGroopWebApp.Tests", "RunGroopWebApp.Tests\RunGroopWebApp.Tests.csproj", "{28D349D8-816F-4C7F-A2A7-24FB714C2DE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunGroopWebApp.Tests", "RunGroopWebApp.Tests\RunGroopWebApp.Tests.csproj", "{28D349D8-816F-4C7F-A2A7-24FB714C2DE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunGroopWebApp.Scraper", "RunGroopWebApp.Scraper\RunGroopWebApp.Scraper.csproj", "{BB5B8E0E-FDD9-4BC5-89DD-31CEC8EFFC2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{28D349D8-816F-4C7F-A2A7-24FB714C2DE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28D349D8-816F-4C7F-A2A7-24FB714C2DE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28D349D8-816F-4C7F-A2A7-24FB714C2DE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB5B8E0E-FDD9-4BC5-89DD-31CEC8EFFC2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB5B8E0E-FDD9-4BC5-89DD-31CEC8EFFC2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB5B8E0E-FDD9-4BC5-89DD-31CEC8EFFC2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB5B8E0E-FDD9-4BC5-89DD-31CEC8EFFC2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
