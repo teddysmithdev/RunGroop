@@ -4,68 +4,74 @@
     ViewData["Title"] = "Home Page";
 }
 
-      <section class="bg-dark space-lg" data-jarallax data-speed="0.2">
-        <img alt="Image" src="/img/photo-road.jpg" class="bg-image position-absolute opacity-20" />
-        <div class="container">
-          <div class="row align-items-center justify-content-between">
+<section class="bg-dark space-lg" data-jarallax data-speed="0.2">
+    <img alt="Image" src="/img/photo-road.jpg" class="bg-image position-absolute opacity-20" />
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
             <div class="col-12 col-md-6 col-lg-5 section-intro">
-              <h1 class="display-3">Find a running group</h1>
-              <span class="lead">
-                A community of devoted runners, passionate about running and life. Ready to find your accountability partner?
-              </span>
+                <h1 class="display-3">Find a running group</h1>
+                <span class="lead">
+                    A community of devoted runners, passionate about running and life. Ready to find your accountability partner?
+                </span>
             </div>
             <!--end of col-->
             <div class="col-12 col-md-6 col-lg-5">
-              <div class="card">
-                <div class="card-body">
-                  <form>
-                    <div class="form-group">
-                      <label for="exampleInputUsername">Username</label>
-                      <input type="text" class="form-control form-control-lg" id="exampleInputUsername" placeholder="Pick a username">
+                <div class="card">
+                    <div class="card-body">
+                        <form asp-action="Index">
+                            <div class="form-group">
+                                <label asp-for="Register.UserName">Username</label>
+                                <input asp-for="Register.UserName" type="text" class="form-control form-control-lg" placeholder="Pick a username">
+                                <span asp-validation-for="Register.UserName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Register.Email">Email address</label>
+                                <input asp-for="Register.Email" type="email" class="form-control form-control-lg" placeholder="Enter email">
+                                <span asp-validation-for="Register.Email" class="text-danger"></span>
+                                <small id="emailHelp" class="form-text">We'll never share your email with anyone else.</small>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Register.Password">Password</label>
+                                <input asp-for="Register.Password" type="password" class="form-control form-control-lg" placeholder="Password">
+                                <span asp-validation-for="Register.Password" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" value="agree" name="agree-terms" id="check-agree">
+                                    <label class="custom-control-label text-small" for="check-agree">
+                                        I agree to the <a href="#">Terms &amp; Conditions</a>
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-success btn-block">Sign up for RunGroop</button>
+                        </form>
                     </div>
-                    <div class="form-group">
-                      <label for="exampleInputEmail">Email address</label>
-                      <input type="email" class="form-control form-control-lg" id="exampleInputEmail" placeholder="Enter email">
-                      <small id="emailHelp" class="form-text">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword">Password</label>
-                      <input type="password" class="form-control form-control-lg" id="exampleInputPassword" placeholder="Password">
-                    </div>
-                    <div class="mb-3">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" value="agree" name="agree-terms" id="check-agree">
-                        <label class="custom-control-label text-small" for="check-agree">I agree to the <a href="#">Terms &amp; Conditions</a>
-                        </label>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-lg btn-success btn-block">Sign up for Wingman</button>
-                  </form>
                 </div>
-              </div>
             </div>
-          </div>
-          <!--end of row-->
         </div>
-        <!--end of container-->
-      </section>
-      <!--end of section-->
-      <section>
-        <div class="container">
-            @if (Model.Clubs == null)
-            {
-                <h1 class="fw-light">There are no running clubs in your area! <a asp-area="" asp-controller="Account"
-                    asp-action="Login">Login</a> and create one!</h1>
-            }
-            else
-            {
-               <div class="row justify-content-between mb-5">
+        <!--end of row-->
+    </div>
+    <!--end of container-->
+</section>
+<!--end of section-->
+<section>
+    <div class="container">
+        @if (Model.Clubs == null)
+        {
+            <h1 class="fw-light">
+                There are no running clubs in your area! <a asp-area="" asp-controller="Account"
+                                                        asp-action="Login">Login</a> and create one!
+            </h1>
+        }
+        else
+        {
+            <div class="row justify-content-between mb-5">
+                <div class="col-auto">
+                    <h3>Running clubs near @Model.City, @Model.State</h3>
+                </div>
+                <!--end of col-->
             <div class="col-auto">
-              <h3>Running clubs near @Model.City, @Model.State</h3>
-            </div>
-            <!--end of col-->
-            <div class="col-auto">
-              <a asp-controller="Club" asp-action="Index" class="btn btn-outline-primary">View all</a>
+              <a href="#" class="btn btn-outline-primary">View all</a>
             </div>
             <!--end of col-->
           </div>
@@ -74,16 +80,8 @@
                 {
                 <li class="col-12 col-md-6 col-lg-4">
                   <div class="card">
-                    <a asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id">
-                        @if(@item.Image != null)
-                        {
-                                    <img class="card-img-top" src="@item.Image" alt="Card image cap">
-                                }
-                                else
-                                {
-                                    <img class="card-img-top" src="/img/rungroop.png" alt="Card image cap">
-                                }
-
+                    <a href="#">
+                      <img class="card-img-top" src="@item.Image" alt="Card image cap">
                     </a>
                     <div class="card-body">
                       <a href="#">
@@ -99,7 +97,7 @@
                         </ul>
                       </div>
                       <div class="dropup">
-                        <a type="btn btn-success" asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id"
+                        <a type="btn btn-success" asp-controller="Race" asp-action="Detail" asp-route-id="@item.Id"
                                     class="btn btn-sm btn-outline-secondary">View</a>
                         <div class="dropdown-menu dropdown-menu-sm" aria-labelledby="SidekickButton">
                           <a class="dropdown-item" href="#">Save</a>
@@ -113,9 +111,9 @@
                   </div>
                 </li>
                 }
-              </ul>
-           }
-          <!--end of row-->
-        </div>
-        <!--end of container-->
-      </section>
+            </ul>
+        }
+        <!--end of row-->
+    </div>
+    <!--end of container-->
+</section>

@@ -45,30 +45,28 @@ namespace RunGroopWebApp.Controllers
                 {
                     homeViewModel.Clubs = await _clubRepository.GetClubByCity(homeViewModel.City);
                 }
-                else
-                {
-                    homeViewModel.Clubs = null;
-                }
                 return View(homeViewModel);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 homeViewModel.Clubs = null;
             }
+
             return View(homeViewModel);
         }
 
-        
         [HttpPost]
-        public async Task<IActionResult> Register(HomeUserCreateViewModel createVM)
+        public async Task<IActionResult> Index(HomeViewModel homeVM)
         {
-            if (!ModelState.IsValid) return View(createVM);
+            var createVM = homeVM.Register;
+
+            if (!ModelState.IsValid) return View(homeVM);
 
             var user = await _userManager.FindByEmailAsync(createVM.Email);
             if (user != null)
             {
-                TempData["Error"] = "This email address is already in use";
-                return View(createVM);
+                ModelState.AddModelError("Register.Email", "This email address is already in use");
+                return View(homeVM);
             }
 
             var newUser = new AppUser
@@ -86,7 +84,6 @@ namespace RunGroopWebApp.Controllers
             }
             return RedirectToAction("Index", "Club");
         }
-    
 
         public IActionResult Privacy()
         {
