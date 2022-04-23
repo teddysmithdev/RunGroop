@@ -2,17 +2,16 @@
 @model RunningClubByState
 
 
-<div class="col-6 col-lg-3">
-                  <h6>Race Directory</h6>
-              
-@foreach(var val in Model.States)
-{
+<section class="container">
+    <h1>Find running clubs in your state</h1>
     <ul class="list-unstyled">
-                    <li>
-    <a asp-controller="Club" asp-action="ListClubsByState" asp-route-state="@val.StateName">Running club in @val.StateName</a>
-    </li>
+        @foreach (var val in Model.States)
+        {
+            <li>
+                <a asp-controller="Club" asp-action="ListClubsByState" asp-route-state="@val.StateName">@val.StateName</a>
+            </li>
+        }
     </ul>
-}
-<
+</section>
 
 

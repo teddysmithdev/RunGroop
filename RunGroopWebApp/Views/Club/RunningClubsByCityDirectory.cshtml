@@ -1,16 +1,18 @@
 ﻿@using RunGroopWebApp.ViewModels
 @model RunningClubByCity
 
-
-<div class="col-6 col-lg-3">
-                  <h6>Race Directory</h6>
-              
-@foreach(var val in Model.Cities)
-{
-    <ul class="list-unstyled">
-                    <li>
-    <a asp-controller="Club" asp-action="ListClubsByCity" asp-route-state="@val.StateCode" asp-route-city="@val.CityName">Running club in @val.CityName, @val.StateCode</a>
-    </li>
-    </ul>
+@{
+    var cities = Model.Cities.DistinctBy(city => city.CityName);
 }
-</div>
+
+<section class="container">
+    <h1>Find running clubs in your city</h1>
+    <ul class="list-unstyled">
+        @foreach (var val in cities)
+        {
+            <li>
+                <a asp-controller="Club" asp-action="ListClubsByCity" asp-route-state="@val.StateCode" asp-route-city="@val.CityName">@val.CityName, @val.StateCode</a>
+            </li>
+        }
+    </ul>
+</section>
