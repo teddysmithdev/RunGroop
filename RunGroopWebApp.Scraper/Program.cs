@@ -12,9 +12,8 @@ using RunGroopWebApp.Scraper.Services;
 
 
 
-MeepUpClient client = new MeepUpClient();
-
-client.SendRequest();
+MeetupScraper scraper = new MeetupScraper();
+scraper.Run();
 
 //AtraScraper scraper = new AtraScraper();
 
