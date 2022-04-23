@@ -55,11 +55,19 @@
                 <li class="col-12 col-md-6 col-lg-4">
                     <div class="card">
                         <a type="button" asp-controller="Race" asp-action="Detail" asp-route-id="@race.Id">
-                            <img class="card-img-top" src="@race.Image" alt="Card image cap">
+                            @if(race.Image == null)
+                            {
+                                <img class="card-img-top" src="https://www.polar.com/blog/wp-content/uploads/2020/02/What-is-mindful-running-main.jpg" alt="Card image cap"> 
+                            }
+                            else
+                            {
+                               <img class="card-img-top" src="@race.Image" alt="Card image cap"> 
+                            }
+                            
                         </a>
                         <div class="card-body">
                             <h4 class="card-title">@race.Title</h4>
-                            <p class="card-text">@race.Description</p>
+                            <p class="card-text">@race.Address.City, @race.Address.State</p>
                         </div>
                         <div class="card-footer card-footer-borderless d-flex justify-content-between">
                             <div>
