@@ -83,7 +83,7 @@ namespace RunGroopWebApp.Data
                             Title = "Running Race 1",
                             Image = "https://www.eatthis.com/wp-content/uploads/sites/4/2020/05/running.jpg?quality=82&strip=1&resize=640%2C360",
                             Description = "This is the description of the first race",
-                            RaceCategory = RaceCategory.Marthon,
+                            RaceCategory = RaceCategory.Marathon,
                             Address = new Address()
                             {
                                 Street = "123 Main St",
@@ -104,20 +104,17 @@ namespace RunGroopWebApp.Data
                                 City = "Charlotte",
                                 State = "NC"
                             }
-
                         }
                     });
                     context.SaveChanges();
                 }
             }
-
         }
 
         public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
-
                 //Roles
                 var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
@@ -148,7 +145,6 @@ namespace RunGroopWebApp.Data
                     await userManager.CreateAsync(newAdminUser, "Coding@1234?");
                     await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
                 }
-
 
                 string appUserEmail = "user@etickets.com";
 
