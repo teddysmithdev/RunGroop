@@ -1,4 +1,5 @@
 ﻿using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RunGroopWebApp.Data;
 using RunGroopWebApp.Interfaces;
@@ -7,10 +8,10 @@ using RunGroopWebApp.ViewModels;
 
 namespace RunGroopWebApp.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         private readonly IDashboardRepository _dashboardRespository;
-        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IPhotoService _photoService;
 
         public DashboardController(IDashboardRepository dashboardRespository, IPhotoService photoService)
