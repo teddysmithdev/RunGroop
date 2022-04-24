@@ -1,5 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+
 @inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@{
+    var currentUser = await UserManager.GetUserAsync(User);
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,29 +54,30 @@
                         {
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown">Dashboard</a>
+                                    <a class="nav-link dropdown-toggle p-lg-0" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @if (!string.IsNullOrEmpty(currentUser.ProfileImageUrl))
+                                        {
+                                            <img alt="Image" src="@currentUser.ProfileImageUrl" class="avatar avatar-xs">
+                                        }
+                                    </a>
                                     <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                                        <a class="dropdown-item" asp-area="" asp-controller="Club" asp-action="Create">
+                                            <span class="h6 mb-0">View Profile</span>
+                                        </a>
+
+                                        <a class="dropdown-item" asp-area="" asp-controller="Club" asp-action="Create">
+                                            <span class="h6 mb-0">Edit Profile</span>
+                                        </a>
 
                                         <a class="dropdown-item" asp-area="" asp-controller="Club" asp-action="Create">
                                             <span class="h6 mb-0">Create Club</span>
                                         </a>
-
-                                        <div class="dropdown-divider"></div>
-
                                         <a class="dropdown-item" asp-area="" asp-controller="Race" asp-action="Create">
                                             <span class="h6 mb-0">Create Race</span>
                                         </a>
-
-                                        <div class="dropdown-divider"></div>
-
-                                        <a class="dropdown-item" asp-area="" asp-controller="Club" asp-action="Create">
-                                            <span class="h6 mb-0">Edit User Profile</span>
-                                        </a>
-                                        <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" asp-area="" asp-controller="Dashboard" asp-action="Index">
-                                            <span class="h6 mb-0">Manage Your Clubs/Races</span>
+                                            <span class="h6 mb-0">Dashboard</span>
                                         </a>
-                                        <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">
                                             <span su class="h6 mb-0">Logout</span>
                                         </a>
@@ -81,10 +89,9 @@
                         {
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a asp-area="" asp-controller="Account"
-                                   asp-action="Register">Sign up</a>
-                                    <span>&nbsp;or&nbsp;</span><a asp-area="" asp-controller="Account"
-                                                              asp-action="Login">Sign in</a>
+                                    <a asp-area="" asp-controller="Account" asp-action="Register">Sign up</a>
+                                    <span>&nbsp;or&nbsp;</span>
+                                    <a asp-area="" asp-controller="Account" asp-action="Login">Sign in</a>
                                 </li>
                             </ul>
                         }
