@@ -1,16 +1,18 @@
-﻿@using RunGroopWebApp.ViewModels
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+
+@using RunGroopWebApp.ViewModels
 @model ListClubByCityViewModel
 
-@{
-    bool isAuthenticated = User.Identity?.IsAuthenticated == true;
-}
 
 <section class="space-sm flush-with-above">
     <div class="container">
-        @if(Model.NoClubWarning == true)
+        @if (Model.NoClubWarning == true)
         {
-            <h1 class="fw-light">There are no running clubs in your area! <a asp-area="" asp-controller="Account"
-                    asp-action="Login">Login</a> and create one!</h1>
+            <h1 class="fw-light">
+                There are no running clubs in your area! <a asp-area="" asp-controller="Account"
+                                                        asp-action="Login">Login</a> and create one!
+            </h1>
         }
         else
         {
@@ -32,7 +34,7 @@
                             <div>
                                 <small>@club.ClubCategory</small>
                             </div>
-                            @if (isAuthenticated && User.IsInRole("admin"))
+                            @if (SignInManager.IsSignedIn(User) && User.IsInRole("admin"))
                             {
                                 <div>
                                     <a type="button" class="btn btn-sm btn-outline-info" asp-controller="Club" asp-action="Edit" asp-route-id="@club.Id">
