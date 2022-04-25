@@ -22,12 +22,15 @@ const searchLocation = async searchText => {
 const outPutHtml = matches => {
     if (matches.length > 0) {
         const html = matches.map(match =>
-            `<li value="${match.stateCode}">${match.cityName}, ${match.stateCode}</li>`)
+            `<li id="registerValues" value="${match.stateCode}">${match.cityName}, ${match.stateCode}</li>`)
             .join("");
         matchList.innerHTML = html;
     }
 }
 
+
 search.addEventListener('input', () => {
     searchLocation(search.value);
 })
+
+

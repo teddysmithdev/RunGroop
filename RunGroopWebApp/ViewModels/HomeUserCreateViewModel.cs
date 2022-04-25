@@ -8,6 +8,7 @@ namespace RunGroopWebApp.ViewModels
         public string Email { get; set; }
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        public string Location { get; set; }
+        [Required]
+        public int? ZipCode { get; set; }
     }
 }

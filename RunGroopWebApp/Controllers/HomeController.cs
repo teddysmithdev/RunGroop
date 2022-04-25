@@ -18,14 +18,16 @@ namespace RunGroopWebApp.Controllers
         private readonly IClubRepository _clubRepository;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly ILocationService _locationService;
 
         public HomeController(ILogger<HomeController> logger, IClubRepository clubRepository,
-            UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+            UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ILocationService locationService)
         {
             _logger = logger;
             _clubRepository = clubRepository;
             _userManager = userManager;
             _signInManager = signInManager;
+            _locationService = locationService;
         }
 
         public async Task<IActionResult> Index()
@@ -75,10 +77,24 @@ namespace RunGroopWebApp.Controllers
                 return View(homeVM);
             }
 
+            var userLocation = await _locationService.GetCityByZipCode(createVM.ZipCode ?? 0);
+
+            if (userLocation == null)
+            {
+                ModelState.AddModelError("Register.ZipCode", "Could not find zip code!");
+                return View(homeVM);
+            }
+
             var newUser = new AppUser
             {
                 UserName = createVM.UserName,
                 Email = createVM.Email,
+                Address = new Address()
+                {
+                    State = userLocation.StateCode,
+                    City = userLocation.CityName,
+                    ZipCode = createVM.ZipCode ?? 0,
+                }
             };
 
             var newUserResponse = await _userManager.CreateAsync(newUser, createVM.Password);
