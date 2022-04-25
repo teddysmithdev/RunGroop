@@ -11,11 +11,6 @@ namespace RunGroopWebApp.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-<<<<<<< Updated upstream
-
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
-        {
-=======
         private readonly ApplicationDbContext _context;
         private readonly ILocationService _locationService;
 
@@ -26,7 +21,6 @@ namespace RunGroopWebApp.Controllers
         {
             _context = context;
             _locationService = locationService;
->>>>>>> Stashed changes
             _signInManager = signInManager;
             _userManager = userManager;
         }
@@ -105,8 +99,6 @@ namespace RunGroopWebApp.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Race");
         }
-<<<<<<< Updated upstream
-=======
 
         [HttpGet]
         public async Task<IActionResult> GetLocation(string location)
@@ -120,6 +112,5 @@ namespace RunGroopWebApp.Controllers
         }
 
 
->>>>>>> Stashed changes
     }
 }
