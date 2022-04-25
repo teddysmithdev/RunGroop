@@ -1,13 +1,48 @@
 ﻿@using RunGroopWebApp.ViewModels
 @model RunningClubByState
 
-<h1>Find by State to see list of cities</h1>
-@foreach(var val in Model.States)
-{
-    <ul class="list-unstyled">
-                    <li>
-    <a asp-controller="Club" asp-action="RunningClubsByCityDirectory" asp-route-state="@val.StateName">@val.StateName</a>
-    </li>
-    </ul>
-}
-</div>
+
+
+
+<section class="container">
+    <h1>Select your state</h1>
+    <div class="row">
+        <form class="card card-sm">
+            <div class="card-body row no-gutters align-items-center">
+                <div class="col-auto">
+                    <i class="icon-magnifying-glass h4 text-body"></i>
+                </div>
+                <!--end of col-->
+                <div class="col">
+                    <input class="form-control form-control-sm form-control-borderless" type="search" placeholder="Search your state" oninput="filterState(this.value);">
+                </div>
+            </div>
+        </form>
+        <!--end of col-->
+    </div>
+    <div class="row">
+        <ul class="list-unstyled">
+            @foreach (var val in Model.States)
+            {
+                <li class="li-item">
+                    <a class="state-link" asp-controller="Club" asp-action="RunningClubsByCityDirectory" asp-route-state="@val.StateName">@val.StateName</a>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+<script type="text/javascript">
+    const elements = [...document.getElementsByClassName("li-item")]
+        .map(elem => ({elem, text: elem.querySelector("a").innerText.toUpperCase()}));
+
+    function filterState(search) {
+        const term = search.toUpperCase();
+
+        for (const {elem, text} of elements) {
+            elem.style.display = text.includes(term) ? "" : "none";
+        }
+    }
+</script>
+
+

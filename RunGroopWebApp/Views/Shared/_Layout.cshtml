@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,85 +14,87 @@
     <link rel="stylesheet" href="~/RunGroopWebApp.styles.css" asp-append-version="true" />
 </head>
 <body>
-     <div class="navbar-container">
-      <div class="bg-light navbar-light" data-sticky="top">
-        <div class="container">
-          <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" id="logo-text">RunGroops</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <i class="icon-menu h4"></i>
-            </button>
-            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-              <ul class="navbar-nav">
-                  <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        @if (User.Identity.IsAuthenticated)
-                        {
+    <div class="navbar-container">
+        <div class="bg-light navbar-light" data-sticky="top">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" id="logo-text">RunGroop</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="icon-menu h4"></i>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                        <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="user" asp-action="Index">Find Runners</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="user" asp-action="Index">Find Runners</a>
+                                </li>
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Club" asp-action="Index">Find Clubs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Race" asp-action="Index">Find Races</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/blog" class="nav-link">Blog</a>
+                            </li>
+                        </ul>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown">Dashboard</a>
+                                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+
+                                        <a class="dropdown-item" asp-area="" asp-controller="Club" asp-action="Create">
+                                            <span class="h6 mb-0">Create Club</span>
+                                        </a>
+
+                                        <div class="dropdown-divider"></div>
+
+                                        <a class="dropdown-item" asp-area="" asp-controller="Race" asp-action="Create">
+                                            <span class="h6 mb-0">Create Race</span>
+                                        </a>
+
+                                        <div class="dropdown-divider"></div>
+
+                                        <a class="dropdown-item" asp-area="" asp-controller="Club" asp-action="Create">
+                                            <span class="h6 mb-0">Edit User Profile</span>
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Dashboard" asp-action="Index">
+                                            <span class="h6 mb-0">Manage Your Clubs/Races</span>
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">
+                                            <span su class="h6 mb-0">Logout</span>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Club" asp-action="Index">Find Clubs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Race" asp-action="Index">Find Races</a>
-                        </li>
-                
-              </ul>
-             @if (User.Identity.IsAuthenticated)
-             {
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown">Dashboard</a>
-                  <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                        else
+                        {
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="Account"
+                                   asp-action="Register">Sign up</a>
+                                    <span>&nbsp;or&nbsp;</span><a asp-area="" asp-controller="Account"
+                                                              asp-action="Login">Sign in</a>
+                                </li>
+                            </ul>
+                        }
 
-                    <a class="dropdown-item" asp-area="" asp-controller="Club" asp-action="Create">
-                      <span class="h6 mb-0" >Create Club</span>
-                    </a>
-
-                    <div class="dropdown-divider"></div>
-
-                    <a class="dropdown-item" asp-area="" asp-controller="Race" asp-action="Create">
-                      <span class="h6 mb-0" >Create Race</span>
-                    </a>
-
-                    <div class="dropdown-divider"></div>
-
-                    <a class="dropdown-item" asp-area="" asp-controller="Club" asp-action="Create">
-                      <span class="h6 mb-0">Edit User Profile</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" asp-area="" asp-controller="Dashboard" asp-action="Index">
-                      <span class="h6 mb-0">Manage Your Clubs/Races</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">
-                      <span class="h6 mb-0">Logout</span>
-                    </a>
-                  </div>
-                </li>
-                </ul>     
-                }
-                else
-                {
-                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                      <a asp-area="" asp-controller="Account"
-                                    asp-action="Register">Sign up</a>
-                      <span>&nbsp;or&nbsp;</span><a asp-area="" asp-controller="Account"
-                                    asp-action="Login">Sign in</a>
-                    </li>
-                </ul>
-                }
-
+                    </div>
+                    <!--end nav collapse-->
+                </nav>
             </div>
-            <!--end nav collapse-->
-          </nav>
+            <!--end of container-->
         </div>
-        <!--end of container-->
-      </div>
     </div>
     <div class="main-container">
         <main role="main" class="pb-3">
@@ -97,96 +102,96 @@
         </main>
     </div>
 
-         <footer class="bg-gray text-light footer-long">
+    <footer class="bg-gray text-light footer-long">
         <div class="container">
-          <div class="row">
-            <div class="col-12 col-md-3">
-              <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" id="logo-text">RunGroops</a>
-              <p class="text-muted">
-                &copy; 2022 RunGroops
-                <br />
-                <br />
-              </p>
+            <div class="row">
+                <div class="col-12 col-md-3">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" id="logo-text">RunGroop</a>
+                    <p class="text-muted">
+                        &copy; 2022 RunGroop
+                        <br />
+                        <br />
+                    </p>
+                </div>
+                <!--end of col-->
+                <div class="col-12 col-md-9">
+                    <span class="h5">The world's first online platform for runners</span>
+                    <div class="row no-gutters">
+                        <div class="col-6 col-lg-3">
+                            <h6>Navigate</h6>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a asp-area="" asp-controller="Home"
+                                       asp-action="Index">Home</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Users"
+                                       asp-action="Index">Find Runners Near You</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Club"
+                                       asp-action="Index">Find Running Clubs Near You</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Race"
+                                       asp-action="Index">Find Running Races Near You</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--end of col-->
+                        <div class="col-6 col-lg-3">
+                            <h6>Club Directory</h6>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a asp-area="" asp-controller="Club"
+                                       asp-action="RunningClubsByStateDirectory">Find Running Clubs By State</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Club"
+                                       asp-action="RunningClubsByStateForCityDirectory">Find Running Clubs By City</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--end of col-->
+                        <div class="col-6 col-lg-3">
+                            <h6>Race Directory</h6>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="#">Find Running Races By City</a>
+                                </li>
+                                <li>
+                                    <a href="#">Find Running Races By State</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--end of col-->
+                        <div class="col-6 col-lg-3">
+                            <h6>Social</h6>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="#">Youtube</a>
+                                </li>
+                                <li>
+                                    <a href="#">Facebook</a>
+                                </li>
+                                <li>
+                                    <a href="#">Twitter</a>
+                                </li>
+                                <li>
+                                    <a href="#">Instagram</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--end of col-->
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of col-->
             </div>
-            <!--end of col-->
-            <div class="col-12 col-md-9">
-              <span class="h5">The world's first online platform for runners</span>
-              <div class="row no-gutters">
-                <div class="col-6 col-lg-3">
-                  <h6>Navigate</h6>
-                  <ul class="list-unstyled">
-                    <li>
-                                            <a  asp-area="" asp-controller="Home"
-                                    asp-action="Index">Home</a>
-                    </li>
-                    <li>
-                                            <a  asp-area="" asp-controller="Users"
-                                    asp-action="Index">Find Runners Near You</a>
-                    </li>
-                    <li>
-                                            <a  asp-area="" asp-controller="Club"
-                                    asp-action="Index">Find Running Clubs Near You</a>
-                    </li>
-                    <li>
-                                            <a  asp-area="" asp-controller="Race"
-                                    asp-action="Index">Find Running Races Near You</a>
-                    </li>
-                  </ul>
-                </div>
-                <!--end of col-->
-                <div class="col-6 col-lg-3">
-                  <h6>Club Directory</h6>
-                  <ul class="list-unstyled">
-                    <li>
-                      <a  asp-area="" asp-controller="Club"
-                                    asp-action="RunningClubsByStateDirectory">Find Running Clubs By State</a>
-                    </li>
-                    <li>
-                      <a  asp-area="" asp-controller="Club"
-                                    asp-action="RunningClubsByStateForCityDirectory">Find Running Clubs By City</a>
-                    </li>
-                  </ul>
-                </div>
-                <!--end of col-->
-                <div class="col-6 col-lg-3">
-                  <h6>Race Directory</h6>
-                  <ul class="list-unstyled">
-                    <li>
-                      <a href="#">Find Running Races By City</a>
-                    </li>
-                    <li>
-                      <a href="#">Find Running Races By State</a>
-                    </li>
-                  </ul>
-                </div>
-                <!--end of col-->
-                <div class="col-6 col-lg-3">
-                  <h6>Social</h6>
-                  <ul class="list-unstyled">
-                    <li>
-                      <a href="#">Youtube</a>
-                    </li>
-                    <li>
-                      <a href="#">Facebook</a>
-                    </li>
-                    <li>
-                      <a href="#">Twitter</a>
-                    </li>
-                    <li>
-                      <a href="#">Instagram</a>
-                    </li>
-                  </ul>
-                </div>
-                <!--end of col-->
-              </div>
-              <!--end of row-->
-            </div>
-            <!--end of col-->
-          </div>
-          <!--end of row-->
+            <!--end of row-->
         </div>
         <!--end of container-->
-      </footer>
+    </footer>
     </div>
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/bootstrap.js"></script>

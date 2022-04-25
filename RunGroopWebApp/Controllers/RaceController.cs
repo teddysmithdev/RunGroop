@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RunGroopWebApp.Data;
+using RunGroopWebApp.Data.Enum;
 using RunGroopWebApp.Interfaces;
 using RunGroopWebApp.Models;
 using RunGroopWebApp.ViewModels;
@@ -19,18 +20,50 @@ namespace RunGroopWebApp.Controllers
             _photoService = photoService;
             _httpContextAccessor = httpContextAccessor;
         }
-        public async Task<IActionResult> Index()
+
+
+        [HttpGet]
+        public async Task<IActionResult> Index(int category = -1, int page = 1, int pageSize = 6)
         {
-            IEnumerable<Race> races = await _raceRepository.GetAll();
-            return View(races);
+            if (page < 1 || pageSize < 1)
+            {
+                return NotFound();
+            }
+
+            // if category is -1 (All) dont filter else filter by selected category
+            var races = category switch
+            {
+                -1 => await _raceRepository.GetSliceAsync((page - 1) * pageSize, pageSize),
+                _ => await _raceRepository.GetRacesByCategoryAndSliceAsync((RaceCategory)category, (page - 1) * pageSize, pageSize),
+            };
+
+            var count = category switch
+            {
+                -1 => await _raceRepository.GetCountAsync(),
+                _ => await _raceRepository.GetCountByCategoryAsync((RaceCategory)category),
+            };
+
+            var viewModel = new IndexRaceViewModel
+            {
+                Races = races,
+                Page = page,
+                PageSize = pageSize,
+                TotalRaces = count,
+                TotalPages = (int)Math.Ceiling(count / (double)pageSize),
+                Category = category,
+            };
+
+            return View(viewModel);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {
-            Race race = await _raceRepository.GetByIdAsync(id);
-            return View(race);
+            var race = await _raceRepository.GetByIdAsync(id);
+            return race == null ? NotFound() : View(race);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             var curUserID = _httpContextAccessor.HttpContext?.User.GetUserId();
@@ -51,6 +84,7 @@ namespace RunGroopWebApp.Controllers
                     Description = raceVM.Description,
                     Image = result.Url.ToString(),
                     AppUserId = raceVM.AppUserId,
+                    RaceCategory = raceVM.RaceCategory,
                     Address = new Address
                     {
                         Street = raceVM.Address.Street,
@@ -69,11 +103,12 @@ namespace RunGroopWebApp.Controllers
             return View(raceVM);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var race = await _raceRepository.GetByIdAsync(id);
             if (race == null) return View("Error");
-            var clubVM = new EditRaceViewModel
+            var raceVM = new EditRaceViewModel
             {
                 Title = race.Title,
                 Description = race.Description,
@@ -82,7 +117,7 @@ namespace RunGroopWebApp.Controllers
                 URL = race.Image,
                 RaceCategory = race.RaceCategory
             };
-            return View(clubVM);
+            return View(raceVM);
         }
 
         [HttpPost]
@@ -91,45 +126,45 @@ namespace RunGroopWebApp.Controllers
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Failed to edit club");
-                return View("Edit", raceVM);
+                return View(raceVM);
             }
 
             var userRace = await _raceRepository.GetByIdAsyncNoTracking(id);
 
-            if (userRace != null)
+            if (userRace == null)
             {
-                try
-                {
-                    await _photoService.DeletePhotoAsync(userRace.Image);
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", "Could not delete photo");
-                    return View(raceVM);
-                }
-                var photoResult = await _photoService.AddPhotoAsync(raceVM.Image);
-
-
-                var race = new Race
-                {
-                    Id = id,
-                    Title = raceVM.Title,
-                    Description = raceVM.Description,
-                    Image = photoResult.Url.ToString(),
-                    AddressId = raceVM.AddressId,
-                    Address = raceVM.Address,
-                };
-
-                _raceRepository.Update(race);
-
-                return RedirectToAction("Index");
+                return View("Error");
             }
-            else
+
+            var photoResult = await _photoService.AddPhotoAsync(raceVM.Image);
+
+            if (photoResult.Error != null)
             {
+                ModelState.AddModelError("Image", "Photo upload failed");
                 return View(raceVM);
             }
+
+            if (!string.IsNullOrEmpty(userRace.Image))
+            {
+                _ = _photoService.DeletePhotoAsync(userRace.Image);
+            }
+
+            var race = new Race
+            {
+                Id = id,
+                Title = raceVM.Title,
+                Description = raceVM.Description,
+                Image = photoResult.Url.ToString(),
+                AddressId = raceVM.AddressId,
+                Address = raceVM.Address,
+            };
+
+            _raceRepository.Update(race);
+
+            return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
             var clubDetails = await _raceRepository.GetByIdAsync(id);
@@ -141,7 +176,16 @@ namespace RunGroopWebApp.Controllers
         public async Task<IActionResult> DeleteClub(int id)
         {
             var raceDetails = await _raceRepository.GetByIdAsync(id);
-            if (raceDetails == null) return View("Error");
+
+            if (raceDetails == null)
+            {
+                return View("Error");
+            }
+
+            if (!string.IsNullOrEmpty(raceDetails.Image))
+            {
+                _ = _photoService.DeletePhotoAsync(raceDetails.Image);
+            }
 
             _raceRepository.Delete(raceDetails);
             return RedirectToAction("Index");
