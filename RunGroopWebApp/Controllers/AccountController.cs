@@ -101,6 +101,18 @@ namespace RunGroopWebApp.Controllers
         }
 
         [HttpGet]
+        [Route("Account/Welcome")]
+        public async Task<IActionResult> Welcome(int page = 0)
+        {
+            if(page == 0)
+            {
+                return View();
+            }
+            return View();
+            
+        }
+
+        [HttpGet]
         public async Task<IActionResult> GetLocation(string location)
         {
             if(location == null)

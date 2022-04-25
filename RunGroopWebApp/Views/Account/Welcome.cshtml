@@ -1,0 +1,44 @@
+﻿@using RunGroopWebApp.ViewModels
+@model WelcomeViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+     <section>
+        <div class="container">
+          <form class="row justify-content-around">
+            <!--end of col-->
+            <div class="col col-lg-9 tab-content">
+              <div id="first">
+                <div class="row align-items-center mb-5">
+                  <div class="col-12 col-md-7">
+                    <h6 class="title-decorative">Step One</h6>
+                    <h3 class="h1">Upload A Picture</h3>
+                    <span class="lead">Let's begin by uploading a picture. Users that upload pictures run more!</span>
+                  </div>
+                  <!--end of col-->
+                   <div class="media flex-wrap mb-0 align-items-center">
+                                @*<img alt="Image" src="@imageU" class="avatar avatar-lg mb-3 mb-md-0" />*@
+                                <div class="media-body">
+                                    <form asp-action="EditProfile" enctype="multipart/form-data">
+                                        <label asp-for="Image" class="custom-file mb-2" for="file2">
+                                            <input asp-for="Image" type="file" id="file2" class="custom-file-input height-0" oninput="submitProfileImage();" />
+                                            <span class="btn btn-primary"><i class="icon-upload-to-cloud">&nbsp;</i>Upload</span>
+                                            <span asp-validation-for="Image" class="text-danger"></span>
+                                            <button id="submit-image-button" type="submit" hidden></button>
+                                        </label>
+                                        <div>
+                                            <small>For best results, use an image at least 256px by 256px in either .jpg or .png format</small>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                  <!--end of col-->
+               </div>
+               </div>
+              </div>
+            </form>
+          </div>
+      </section>
