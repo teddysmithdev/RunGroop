@@ -27,7 +27,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
-<<<<<<< Updated upstream
                             @if (SignInManager.IsSignedIn(User))
                             {
                                 <li class="nav-item">
@@ -50,26 +49,6 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown">Dashboard</a>
                                     <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-=======
-                        }
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Club" asp-action="Index">Find Clubs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Race" asp-action="Index">Find Races</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/blog" class="nav-link">Blog</a>
-                        </li>
-                
-              </ul>
-             @if (User.Identity.IsAuthenticated)
-             {
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown">Dashboard</a>
-                  <div class="dropdown-menu" aria-labelledby="pagesDropdown">
->>>>>>> Stashed changes
 
                                         <a class="dropdown-item" asp-area="" asp-controller="Club" asp-action="Create">
                                             <span class="h6 mb-0">Create Club</span>
@@ -217,6 +196,7 @@
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/bootstrap.js"></script>
     <script src="~/js/theme.js"></script>
+    <script src="~/js/custom.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

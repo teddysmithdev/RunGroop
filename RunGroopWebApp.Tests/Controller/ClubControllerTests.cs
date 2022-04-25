@@ -52,7 +52,7 @@ namespace RunGroopWebApp.Tests.Controller
             var club = A.Fake<Club>();
             A.CallTo(() => _clubRepository.GetByIdAsync(id)).Returns(club);
             //Act
-            var result = _clubController.Detail(id);
+            var result = _clubController.DetailClub(id, "RunningClub");
             //Assert
             result.Should().BeOfType<Task<IActionResult>>();
         }
