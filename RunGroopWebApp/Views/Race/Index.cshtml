@@ -1,4 +1,5 @@
 ﻿@using RunGroopWebApp.Data.Enum
+@using RunGroopWebApp.Extensions
 @using RunGroopWebApp.ViewModels
 @model IndexRaceViewModel
 
@@ -54,7 +55,7 @@
             {
                 <li class="col-12 col-md-6 col-lg-4">
                     <div class="card">
-                        <a type="button" asp-controller="Race" asp-action="Detail" asp-route-id="@race.Id">
+                        <a type="button" asp-controller="Race" asp-action="DetailRace" asp-route-runningRace="@race.Title.GenerateSlug()" asp-route-id="@race.Id">
                             @if(race.Image == null)
                             {
                                 <img class="card-img-top" src="/img/racesEvent.png" alt="Card image cap"> 
