@@ -1,5 +1,4 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using System.Security.Claims
 
 @inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
@@ -25,7 +24,7 @@
         <div class="bg-light navbar-light" data-sticky="top">
             <div class="container">
                 <nav class="navbar navbar-expand-lg">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" id="logo-text">RunGroop</a>
+                    <a class="navbar-brand" asp-controller="Home" asp-action="Index" id="logo-text">RunGroop</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="icon-menu h4"></i>
                     </button>
@@ -59,13 +58,17 @@
                                         {
                                             <img alt="Image" src="@currentUser.ProfileImageUrl" class="avatar avatar-xs">
                                         }
+                                        else
+                                        {
+                                            <img alt="Image" src="/img/avatar-male-4.jpg" class="avatar avatar-xs">
+                                        }
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                                        <a class="dropdown-item" asp-area="" asp-controller="Club" asp-action="Create">
+                                        <a class="dropdown-item" asp-controller="User" asp-action="Detail" asp-route-id="@currentUser.Id">
                                             <span class="h6 mb-0">View Profile</span>
                                         </a>
 
-                                        <a class="dropdown-item" asp-area="" asp-controller="Club" asp-action="Create">
+                                        <a class="dropdown-item" asp-controller="User" asp-action="EditProfile">
                                             <span class="h6 mb-0">Edit Profile</span>
                                         </a>
 
