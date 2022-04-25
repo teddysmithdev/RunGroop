@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="~/RunGroopWebApp.styles.css" asp-append-version="true" />
 </head>
 <body>
+<<<<<<< Updated upstream
     <div class="navbar-container">
         <div class="bg-light navbar-light" data-sticky="top">
             <div class="container">
@@ -45,9 +46,27 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Race" asp-action="Index">Find Races</a>
                             </li>
+=======
+     <div class="navbar-container">
+      <div class="bg-light navbar-light" data-sticky="top">
+        <div class="container">
+          <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" id="logo-text">RunGroop</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="icon-menu h4"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+>>>>>>> Stashed changes
                             <li class="nav-item">
-                                <a href="/blog" class="nav-link">Blog</a>
+                                <a class="nav-link" asp-area="" asp-controller="user" asp-action="Index">Find Runners</a>
                             </li>
+<<<<<<< Updated upstream
                         </ul>
                         @if (SignInManager.IsSignedIn(User))
                         {
@@ -71,6 +90,23 @@
                                         <a class="dropdown-item" asp-controller="User" asp-action="EditProfile">
                                             <span class="h6 mb-0">Edit Profile</span>
                                         </a>
+=======
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Club" asp-action="Index">Find Clubs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Race" asp-action="Index">Find Races</a>
+                        </li>
+                
+              </ul>
+             @if (User.Identity.IsAuthenticated)
+             {
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown">Dashboard</a>
+                  <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+>>>>>>> Stashed changes
 
                                         <a class="dropdown-item" asp-area="" asp-controller="Club" asp-action="Create">
                                             <span class="h6 mb-0">Create Club</span>

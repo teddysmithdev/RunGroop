@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RunGroopWebApp.Data;
+using RunGroopWebApp.Interfaces;
 using RunGroopWebApp.Models;
 using RunGroopWebApp.ViewModels;
 
@@ -10,9 +11,22 @@ namespace RunGroopWebApp.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+<<<<<<< Updated upstream
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
+=======
+        private readonly ApplicationDbContext _context;
+        private readonly ILocationService _locationService;
+
+        public AccountController(UserManager<AppUser> userManager, 
+            SignInManager<AppUser> signInManager, 
+            ApplicationDbContext context,
+            ILocationService locationService)
+        {
+            _context = context;
+            _locationService = locationService;
+>>>>>>> Stashed changes
             _signInManager = signInManager;
             _userManager = userManager;
         }
@@ -91,5 +105,21 @@ namespace RunGroopWebApp.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Race");
         }
+<<<<<<< Updated upstream
+=======
+
+        [HttpGet]
+        public async Task<IActionResult> GetLocation(string location)
+        {
+            if(location == null)
+            {
+                return Json("Not found");
+            }
+            var locationResult = await _locationService.GetLocationSearch(location);
+            return Json(locationResult);
+        }
+
+
+>>>>>>> Stashed changes
     }
 }
