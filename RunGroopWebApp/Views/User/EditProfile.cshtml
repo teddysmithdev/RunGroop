@@ -1,0 +1,311 @@
+﻿@using RunGroopWebApp.ViewModels
+@model EditProfileViewModel
+
+<div class="main-container">
+    <section class="bg-white space-sm pb-4">
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-auto">
+                    <h1 class="h2">Account Settings</h1>
+                </div>
+                <!--end of col-->
+                <!--end of col-->
+            </div>
+            <!--end of row-->
+        </div>
+        <!--end of container-->
+    </section>
+    <!--end of section-->
+    <section class="flush-with-above space-0">
+        <div class="bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active"
+                                   id="overview-tab"
+                                   data-toggle="tab"
+                                   href="#profile"
+                                   role="tab"
+                                   aria-selected="true">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   id="security-tab"
+                                   data-toggle="tab"
+                                   href="#security"
+                                   role="tab"
+                                   aria-selected="false">Security</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   id="notifications-tab"
+                                   data-toggle="tab"
+                                   href="#notifications"
+                                   role="tab"
+                                   aria-selected="false">Notifications</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--end of col-->
+                </div>
+                <!--end of row-->
+            </div>
+            <!--end of container-->
+        </div>
+    </section>
+    <section class="flush-with-above height-80 d-block">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="profile" role="tabpanel">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="media flex-wrap mb-0 align-items-center">
+                                @{
+                                    var imageUrl = string.IsNullOrEmpty(Model.ProfileImageUrl)
+                                    ? "/img/avatar-male-3.jpg"
+                                    : Model.ProfileImageUrl;
+                                }
+                                <img alt="Image" src="@imageUrl" class="avatar avatar-lg mb-3 mb-md-0" />
+                                <div class="media-body">
+                                    <form asp-action="EditProfile" enctype="multipart/form-data">
+                                        <label asp-for="Image" class="custom-file mb-2" for="file2">
+                                            <input asp-for="Image" type="file" id="file2" class="custom-file-input height-0" oninput="submitProfileImage();" />
+                                            <span class="btn btn-primary"><i class="icon-upload-to-cloud">&nbsp;</i>Upload</span>
+                                            <span asp-validation-for="Image" class="text-danger"></span>
+                                            <button id="submit-image-button" type="submit" hidden></button>
+                                        </label>
+                                        <div>
+                                            <small>For best results, use an image at least 256px by 256px in either .jpg or .png format</small>
+                                        </div>
+
+                                        <input asp-for="City" hidden />
+                                        <input asp-for="State" hidden />
+                                        <input asp-for="Pace" hidden />
+                                        <input asp-for="Mileage" hidden />
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end of col-->
+                    </div>
+                    <!--end of row-->
+                    <hr />
+                    <div class="row mb-4">
+                        <div class="col">
+                            <h5>Profile Information</h5>
+                        </div>
+                        <!--end of col-->
+                    </div>
+                    <!--end of row-->
+                    <div class="row">
+                        <!--end of col-->
+                        <div class="col-12 col-md-8 order-md-1">
+                            <form asp-action="EditProfile" method="post" class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label asp-for="City">City:</label>
+                                        <input asp-for="City" type="text" class="form-control form-control-lg" />
+                                        <span asp-validation-for="City" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label asp-for="State">State:</label>
+                                        <input asp-for="State" type="text" class="form-control form-control-lg" />
+                                        <span asp-validation-for="State" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label asp-for="Pace">Pace:</label>
+                                        <input asp-for="Pace" type="text" class="form-control form-control-lg" />
+                                        <span asp-validation-for="Pace" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label asp-for="Mileage">Mileage:</label>
+                                        <input asp-for="Mileage" type="text" class="form-control form-control-lg" />
+                                        <span asp-validation-for="Mileage" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="about-me">About me:</label>
+                                        <textarea class="form-control form-control-lg"
+                                                  name="profileBio"
+                                                  rows="4"
+                                                  id="about-me"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">Save changes</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--end of col-->
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </div>
+            <!--end of tab pane-->
+            <div class="tab-pane fade" id="security" role="tabpanel">
+                <div class="container"></div>
+                <!--end of container-->
+            </div>
+            <!--end of tab pane-->
+            <div class="tab-pane fade" id="notifications" role="tabpanel">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-info text-small mb-0" role="alert">
+                                <i class="icon-shield"></i>
+                                <span>
+                                    We will never distribute your email address to third parties. Read about email communication in
+                                    our privacy policy.
+                                </span>
+                                <a href="#">View privacy policy &rsaquo;</a>
+                            </div>
+                        </div>
+                        <!--end of col-->
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-12">
+                            <form>
+                                <h5 class="mb-4">Notification Preferences</h5>
+                                <div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox"
+                                               class="custom-control-input"
+                                               name="notify-mention"
+                                               checked
+                                               id="notify-mention" />
+                                        <label class="custom-control-label" for="notify-mention">Someone mentions me</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox"
+                                               class="custom-control-input"
+                                               name="notify-request"
+                                               checked
+                                               id="notify-follow" />
+                                        <label class="custom-control-label" for="notify-follow">Someone follows me</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox"
+                                               class="custom-control-input"
+                                               name="notify-share"
+                                               checked
+                                               id="notify-share" />
+                                        <label class="custom-control-label" for="notify-share">Someone shares my activty</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox"
+                                               class="custom-control-input"
+                                               name="notify-message"
+                                               checked
+                                               id="notify-message" />
+                                        <label class="custom-control-label" for="notify-message">Someone messages me</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox"
+                                               class="custom-control-input"
+                                               name="notify-adds"
+                                               checked
+                                               id="notify-adds" />
+                                        <label class="custom-control-label" for="notify-adds">Someone adds me to a project</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" name="notify-sales" id="notify-sales" />
+                                        <label class="custom-control-label" for="notify-sales">Sales and promotions</label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-secondary mt-4" disabled>Update preferences</button>
+                            </form>
+                        </div>
+                        <!--end of col-->
+                    </div>
+                    <!--end of row-->
+                    <hr />
+                    <div class="row">
+                        <div class="col-12">
+                            <form>
+                                <h5>Notification Frequency</h5>
+                                <div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="notify-daily"
+                                               type="radio"
+                                               class="custom-control-input"
+                                               value="notify-daily"
+                                               name="notify-frequency" />
+                                        <label class="custom-control-label" for="notify-daily">Daily</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="notify-weekly"
+                                               type="radio"
+                                               class="custom-control-input"
+                                               value="notify-weekly"
+                                               name="notify-frequency"
+                                               checked />
+                                        <label class="custom-control-label" for="notify-weekly">Weekly</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="notify-monthly"
+                                               type="radio"
+                                               class="custom-control-input"
+                                               value="notify-monthly"
+                                               name="notify-frequency" />
+                                        <label class="custom-control-label" for="notify-monthly">Monthly</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="custom-control custom-radio">
+                                        <input id="notify-never"
+                                               type="radio"
+                                               class="custom-control-input"
+                                               value="notify-never"
+                                               name="notify-frequency" />
+                                        <label class="custom-control-label" for="notify-never">Never</label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-secondary mt-4" disabled>Update frequency</button>
+                            </form>
+                        </div>
+                        <!--end of col-->
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </div>
+        </div>
+        <!--end of tabs content-->
+    </section>
+    <!--end of section-->
+</div>
+
+
+<script type="text/javascript">
+    function submitProfileImage() {
+        document.getElementById("submit-image-button").click();
+    }
+</script>

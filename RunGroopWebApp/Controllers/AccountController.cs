@@ -10,14 +10,14 @@ namespace RunGroopWebApp.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly ApplicationDbContext _context;
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ApplicationDbContext context)
+
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
-            _context = context;
             _signInManager = signInManager;
             _userManager = userManager;
         }
 
+        [HttpGet]
         public IActionResult Login()
         {
             var response = new LoginViewModel();
@@ -35,7 +35,7 @@ namespace RunGroopWebApp.Controllers
             {
                 //User is found, check password
                 var passwordCheck = await _userManager.CheckPasswordAsync(user, loginViewModel.Password);
-                if(passwordCheck)
+                if (passwordCheck)
                 {
                     //Password correct, sign in
                     var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, false, false);
@@ -53,6 +53,7 @@ namespace RunGroopWebApp.Controllers
             return View(loginViewModel);
         }
 
+        [HttpGet]
         public IActionResult Register()
         {
             var response = new RegisterViewModel();
@@ -65,7 +66,7 @@ namespace RunGroopWebApp.Controllers
             if (!ModelState.IsValid) return View(registerViewModel);
 
             var user = await _userManager.FindByEmailAsync(registerViewModel.EmailAddress);
-            if(user != null)
+            if (user != null)
             {
                 TempData["Error"] = "This email address is already in use";
                 return View(registerViewModel);
@@ -90,7 +91,5 @@ namespace RunGroopWebApp.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Race");
         }
-
-
     }
 }

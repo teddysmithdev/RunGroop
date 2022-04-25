@@ -18,14 +18,18 @@
                                         </div>
                                     </div>
                                 </th>
-                                <td>Pace @user.Pace</td>
-                                <td>Mileage @user.Mileage</td>
-                                <td><i class="icon-location"></i>@user.Location</td>
                                 <td>
                                     <a class="btn btn-outline-primary" asp-controller="User" asp-action="Detail" asp-route-id="@user.Id">
-                                        View
+                                        View Profile
                                     </a>
                                 </td>
+
+                                @{
+                                    var mileage = user.Mileage == null ? "?" : user.Mileage.ToString();
+                                    var pace = user.Pace == null ? "?" : user.Mileage.ToString();
+                                }
+                                <td>@mileage mile at @pace mph</td>
+                                <td><i class="icon-location"></i> @user.Location</td>
                             </tr>
                             <tr class="table-divider">
                                 <th></th>
