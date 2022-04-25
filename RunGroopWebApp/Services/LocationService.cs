@@ -20,7 +20,7 @@ namespace RunGroopWebApp.Services
             List<City> result;
             if(location.Length > 0 && char.IsDigit(location[0]))
             {
-                return await _context.Cities.Where(x => x.Zip.ToString().StartsWith(location)).Take(10).ToListAsync();
+                return await _context.Cities.Where(x => x.Zip.ToString().StartsWith(location)).Take(4).Distinct().ToListAsync();
             }
             else if (location.Length > 0)
             {

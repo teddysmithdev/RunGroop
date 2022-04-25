@@ -35,14 +35,23 @@
                                 <input asp-for="Register.Password" type="password" class="form-control form-control-lg" placeholder="Password">
                                 <span asp-validation-for="Register.Password" class="text-danger"></span>
                             </div>
-                            <div class="mb-3">
+                            <div class="form-group">
+                                <label asp-for="Register.Location">Location</label>
+                                <input asp-for="Register.Location" type="text" list="datlistOptions" id="registerLocation" class="form-control form-control-lg" placeholder="Zipcode">
+                                <div id="datalistOptions">
+                                    
+                                </div>
+                                <span asp-validation-for="Register.Location" class="text-danger"></span>
+
+                            </div>
+@*                            <div class="mb-3">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" value="agree" name="agree-terms" id="check-agree">
                                     <label class="custom-control-label text-small" for="check-agree">
                                         I agree to the <a href="#">Terms &amp; Conditions</a>
                                     </label>
                                 </div>
-                            </div>
+                            </div>*@
                             <button type="submit" class="btn btn-lg btn-success btn-block">Sign up for RunGroop</button>
                         </form>
                     </div>

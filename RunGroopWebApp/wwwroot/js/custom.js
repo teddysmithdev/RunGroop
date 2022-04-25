@@ -9,7 +9,7 @@ const searchLocation = async searchText => {
     const locationData = await res.json();
 
     console.log(locationData);
-    let matches = locationData.data.filter(state => {
+    let matches = locationData.filter(state => {
         const regex = new RegExp(`^${searchText}`, 'gi');
         return String(state.zip).match(regex) || String(state.cityName).match(regex)
     });
@@ -22,7 +22,7 @@ const searchLocation = async searchText => {
 const outPutHtml = matches => {
     if (matches.length > 0) {
         const html = matches.map(match =>
-            `<option value="${match.cityName}, ${match.stateCode}">`)
+            `<li value="${match.stateCode}">${match.cityName}, ${match.stateCode}</li>`)
             .join("");
         matchList.innerHTML = html;
     }

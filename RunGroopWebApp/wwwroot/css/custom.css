@@ -11,3 +11,26 @@
     font-family: "Jua", sans-serif;
     font-size: 2rem;
 }
+
+
+#datalistOptions {
+    border: 1px #ccc;
+    padding: 3px;
+    list-style-type: none;
+}
+
+#datalistOptions ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+    #datalistOptions ul li {
+        padding: 5px 0;
+        list-style-type: none;
+    }
+
+        #datalistOptions ul li:hover {
+            background: #ffffff;
+            list-style-type: none;
+        }
