@@ -58,7 +58,12 @@ namespace RunGroopWebApp.Controllers
             return View(homeViewModel);
         }
 
-        
+        public IActionResult Register() 
+        {
+            var response = new HomeUserCreateViewModel();
+            return View(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Register(HomeUserCreateViewModel createVM)
         {

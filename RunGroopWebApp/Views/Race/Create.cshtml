@@ -1,12 +1,104 @@
 ﻿@using RunGroopWebApp.Data.Enum
 @using RunGroopWebApp.ViewModels
 @model CreateRaceViewModel
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
 
+
+ <div class="navbar-container">
+    </div>
+    <div class="main-container">
+      <section class="space-sm">
+        <div class="container">
+          <div class="row mb-5">
+            <!--end of col-->
+          </div>
+          <!--end of row-->
+          <div class="row flex-md-row card card-md">
+            <div class="card-body bg-secondary">
+              <div class="text-center mb-5">
+                <h1 class="h2 mb-2">Create your own race</h1>
+                <span>Challenge the runners in your community</span>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-6 col-lg-5">
+                  <form method="post" asp-action="Create" enctype="multipart/form-data">
+                   <input type="hidden" id="AppUserId" name="AppUserId" asp-for="AppUserId" />
+                    <div class="form-row form-group">
+                      <div class="col">                       
+                        <input asp-for="Title" class="form-control form-control-lg" placeholder="Title" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                      </div>
+                    </div>
+                    <div class="form-row form-group">
+                      <div class="col">                        
+                        <input asp-for="Description" class="form-control form-control-lg" placeholder="Description" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                      </div>
+                    </div> 
+
+                    <div class="form-row form-group">
+                      <div class="col">                        
+                         <select asp-for="RaceCategory" asp-items="@Html.GetEnumSelectList<RaceCategory>()" class="form-control">
+                                    <option>--Select--</option>
+                         </select>
+                         <span asp-validation-for="RaceCategory" class="text-danger"></span>
+                      </div>
+                    </div> 
+
+                    <div class="form-row form-group">
+                      <div class="col">                      
+                        <input asp-for="Address.Street" class="form-control form-control-lg" placeholder="Street" />
+                        <span asp-validation-for="Address.Street" class="text-danger"></span>
+                      </div>
+                    </div>
+                    <div class="form-row form-group">
+                      <div class="col">                        
+                        <input asp-for="Address.City" class="form-control form-control-lg" placeholder="City" />
+                        <span asp-validation-for="Address.City" class="text-danger"></span>
+                      </div>
+                      <div class="col">
+                        <input asp-for="Address.State" class="form-control form-control-lg" placeholder="State" />
+                        <span asp-validation-for="Address.State" class="text-danger"></span>
+                      </div>
+                    </div>
+                    <div class="form-row form-group">
+                      <div class="col">                        
+                        <input asp-for="Image" type="file" class="form-control form-control-lg" placeholder="Image" />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                      </div>
+                    </div>
+                    <div class="form-row form-group">
+                      <div class="col">
+                        <button class="btn btn-block btn-success btn-lg" type="submit">Create Account</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end of container-->
+      </section>
+      <!--end of section-->
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*
 <form method="post" asp-action="Create" enctype="multipart/form-data">
     <input type="hidden" id="AppUserId" name="AppUserId" asp-for="AppUserId" />
   <div class="form-group">
@@ -48,3 +140,4 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+*@
