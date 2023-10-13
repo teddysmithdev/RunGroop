@@ -19,15 +19,17 @@ namespace RunGroopWebApp.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILocationService _locationService;
+        private readonly IConfiguration _config;
 
         public HomeController(ILogger<HomeController> logger, IClubRepository clubRepository,
-            UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ILocationService locationService)
+            UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ILocationService locationService, IConfiguration config)
         {
             _logger = logger;
             _clubRepository = clubRepository;
             _userManager = userManager;
             _signInManager = signInManager;
             _locationService = locationService;
+            _config = config;
         }
 
         public async Task<IActionResult> Index()
@@ -36,7 +38,7 @@ namespace RunGroopWebApp.Controllers
             var homeViewModel = new HomeViewModel();
             try
             {
-                string url = "https://ipinfo.io?token=63d5ada815b74c";
+                string url = "https://ipinfo.io?token=" + _config.GetValue<string>("IPInfoToken");
                 var info = new WebClient().DownloadString(url);
                 ipInfo = JsonConvert.DeserializeObject<IPInfo>(info);
                 RegionInfo myRI1 = new RegionInfo(ipInfo.Country);
