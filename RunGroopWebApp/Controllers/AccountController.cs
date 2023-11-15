@@ -90,7 +90,6 @@ namespace RunGroopWebApp.Controllers
             if (newUserResponse.Succeeded)
             {
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
-                return RedirectToAction("Login", "Account");
             }
             else
             {
@@ -99,7 +98,7 @@ namespace RunGroopWebApp.Controllers
                 return View(registerViewModel);
             }
 
-            return RedirectToAction("Index", "Race");
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpGet]
