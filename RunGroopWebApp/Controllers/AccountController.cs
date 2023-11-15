@@ -88,7 +88,16 @@ namespace RunGroopWebApp.Controllers
             var newUserResponse = await _userManager.CreateAsync(newUser, registerViewModel.Password);
 
             if (newUserResponse.Succeeded)
+            {
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
+                return RedirectToAction("Login", "Account");
+            }
+            else
+            {
+                TempData["Error"] = "Passwords must have at least one uppercase ('A'-'Z'), " +
+                    "one digit ('0'-'9') and one non alphanumeric character";
+                return View(registerViewModel);
+            }
 
             return RedirectToAction("Index", "Race");
         }
