@@ -95,7 +95,6 @@ namespace RunGroopWebApp.Controllers
                 {
                     State = userLocation.StateCode,
                     City = userLocation.CityName,
-                    ZipCode = createVM.ZipCode ?? 0,
                 }
             };
 
